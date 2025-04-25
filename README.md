@@ -22,7 +22,5 @@ This is necessary due to the fact that browsers can block packaged extensions in
 - Added Translations for the VDCEditor
 - Added an auto scroll on a new line
 - Added a replace links to their special templates (idea from VDC:Alternative Languages the regex area)
-- Added a version on top right corner of the editor  and it turns red if there is a new version (with hover text for info)
-- Added a font size in the Preferences
 
 
