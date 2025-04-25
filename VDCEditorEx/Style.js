@@ -606,7 +606,7 @@ function StyleMain()
 	{
 		transition:visibility 0.1s linear, background 0.1s linear, opacity 0.1s linear;
 		opacity: 100;
-		background: #262626;
+		background: ${lightenColor(Ed_Color_Background, 5)};
 		visibility: visible;
 	}
 
