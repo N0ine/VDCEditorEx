@@ -2,7 +2,7 @@
 
 Changes the textarea for editing pages to a more improved version. Designed for the Valve Developer Community site.
 
-**This is a temporary editor until v0.2 comes out.**
+**This is a temporary editor, the "Extended" is there to prevent any confusion until v0.2 comes out.**
 
 **This extension may be unstable because it’s still under development. 
 By installing it, you agree that I (as the creator of this extension) am not responsible for any shortcomings. 
