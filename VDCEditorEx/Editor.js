@@ -50,6 +50,11 @@ function EditorMain()
 {
 	var Editor_copywarn = document.getElementById("editpage-copywarn");
 	Editor_copywarn.style.paddingTop = "0.5em"; // by default, the text is way to close to the button, this fixes it
+	
+	var link = document.querySelector('a.oo-ui-buttonElement-button');
+	link.style.color = Ed_Color_TEXT;
+	link.classList.remove('oo-ui-buttonElement-button');
+
 
 	let Span_ExtensionLoaded = document.createElement('span');
 	
@@ -88,6 +93,7 @@ function EditorMain()
 	var MwTimeStamp = false;
 	var ColoredNumbers = false;
 
+	var DropDownWin3 = false;
 	var DropDownWin2 = false;
 	var DropDownWin = false;
 	var MwRtl = false;
@@ -165,7 +171,7 @@ function EditorMain()
 
 	Div_StylizedCode.id = "VDCEditorEx-StylizedCode";
 
-	Div_StylizedCode.style.color = "#D8D7D6";
+	Div_StylizedCode.style.color = Ed_Color_TEXT;
 
 	Div_StylizedCode.setAttribute("contenteditable", "true");
 	Div_StylizedCode.setAttribute("tabindex", "-1");
@@ -302,7 +308,7 @@ function EditorMain()
 			Div_CodeLines.style.paddingLeft = (5 + Div_LineNumbers.clientWidth) + "px";
 		}
 
-		Div_StylizedCode.style.color = "#D8D7D6";
+		Div_StylizedCode.style.color = Ed_Color_TEXT;
 		Div_StylizedCode.style.width = "calc(100% - " + (10 + Div_LineNumbers.clientWidth) + "px" + ")";	
 		Div_SameSelection.style.width = "calc(100% - " + (10 + Div_LineNumbers.clientWidth) + "px" + ")";
 		Div_CodeLines.style.width = "calc(100% - " + (10 + Div_LineNumbers.clientWidth) + "px" + ")";
@@ -617,7 +623,7 @@ function EditorMain()
 				Div_SameSelection.innerHTML = "";
 
 			const SameSelectionCount = document.getElementById('VDCEditorEx-SameSelection').querySelectorAll('.VDCEditorEx-SameAsSelected');
-			CurrentCount.innerText = "Count: " + SameSelectionCount.length;
+			CurrentCount.innerHTML = getTranslation("Found") + SameSelectionCount.length;
 				
 			setTimeout(() => { 
 				
@@ -978,6 +984,72 @@ function EditorMain()
 		COLOR_timestamp = e.target.value
 		StyleMain();
 		chrome.storage.sync.set({ Input_CP_TimeStamp: e.target.value});
+	});
+
+	// Editor colors
+
+	Input_CP_Border.addEventListener('change', function(e) {
+		e.preventDefault();
+		Ed_Color_Border = e.target.value;
+		StyleMain();
+		chrome.storage.sync.set({ Input_CP_Border: e.target.value });
+	});
+	
+	Input_CP_Background.addEventListener('change', function(e) {
+		e.preventDefault();
+		Ed_Color_Background = e.target.value;
+		StyleMain();
+		chrome.storage.sync.set({ Input_CP_Background: e.target.value });
+	});
+	
+	Input_CP_ToolbarText.addEventListener('change', function(e) {
+		e.preventDefault();
+		Ed_Color_ToolbarText = e.target.value;
+		StyleMain();
+		chrome.storage.sync.set({ Input_CP_ToolbarText: e.target.value });
+	});
+	
+	Input_CP_Button_Border.addEventListener('change', function(e) {
+		e.preventDefault();
+		Ed_Color_Button_Border = e.target.value;
+		StyleMain();
+		chrome.storage.sync.set({ Input_CP_Button_Border: e.target.value });
+	});
+	
+	Input_CP_Button_BG.addEventListener('change', function(e) {
+		e.preventDefault();
+		Ed_Color_Button_BG = e.target.value;
+		StyleMain();
+		chrome.storage.sync.set({ Input_CP_Button_BG: e.target.value });
+	});
+	
+	Input_CP_SummaryBG.addEventListener('change', function(e) {
+		e.preventDefault();
+		Ed_Color_SummaryBG = e.target.value;
+		StyleMain();
+		chrome.storage.sync.set({ Input_CP_SummaryBG: e.target.value });
+	});
+	
+	Input_CP_ScrBar1.addEventListener('change', function(e) {
+		e.preventDefault();
+		Ed_Color_ScrBar1 = e.target.value;
+		StyleMain();
+		chrome.storage.sync.set({ Input_CP_ScrBar1: e.target.value });
+	});
+	
+	Input_CP_ScrBar2.addEventListener('change', function(e) {
+		e.preventDefault();
+		Ed_Color_ScrBar2 = e.target.value;
+		StyleMain();
+		chrome.storage.sync.set({ Input_CP_ScrBar2: e.target.value });
+	});
+	
+	Input_CP_TEXT.addEventListener('change', function(e) {
+		e.preventDefault();
+		Ed_Color_TEXT = e.target.value;
+		Div_StylizedCode.style.color = e.target.value;
+		StyleMain();
+		chrome.storage.sync.set({ Input_CP_TEXT: e.target.value });
 	});
 
 	//================================================================
@@ -1364,6 +1436,8 @@ function EditorMain()
 		}
 		Div_DropDownWin2.setAttribute("checked", "false");
 		DropDownWin2 = false;
+		Div_DropDownWin3.setAttribute("checked", "false");
+		DropDownWin3 = false;
 	}
 
 	function Func_DropDownWindow2_OnClick()
@@ -1378,6 +1452,26 @@ function EditorMain()
 			Div_DropDownWin2.setAttribute("checked", "false");
 			DropDownWin2 = false;
 		}
+		Div_DropDownWin3.setAttribute("checked", "false");
+		DropDownWin3 = false;
+		Div_DropDownWin.setAttribute("checked", "false");
+		DropDownWin = false;
+	}
+
+	function Func_DropDownWindow3_OnClick()
+	{
+		if (DropDownWin3 == false)
+		{
+			Div_DropDownWin3.setAttribute("checked", "true");
+			DropDownWin3 = true;
+		}
+		else
+		{
+			Div_DropDownWin3.setAttribute("checked", "false");
+			DropDownWin3 = false;
+		}
+		Div_DropDownWin2.setAttribute("checked", "false");
+		DropDownWin2 = false;
 		Div_DropDownWin.setAttribute("checked", "false");
 		DropDownWin = false;
 	}
@@ -1388,10 +1482,12 @@ function EditorMain()
 		const pref_btn = document.querySelectorAll('.VDCEditorEx-DropDown-Btn');
 		const style_input = document.querySelectorAll('.VDCEditorEx-DropDown-Colorpicker');
 
+		let wpMinoredit = document.getElementById("mw-editpage-minoredit");
+
 		const removeAttribs = 
 		[
 			Div_LineNumbers, 
-			Div_DropDownWin2, Div_DropDownWin, 
+			Div_DropDownWin3, Div_DropDownWin2, Div_DropDownWin, 
 			Td_rtl, Td_rtl_btn,
 			Td_ResWin, Td_ResWin_btn,
 			Td_ScrollNewLine, Td_ScrollNewLine_btn,
@@ -1408,7 +1504,18 @@ function EditorMain()
 			Td_CP_Post, Input_CP_Post,
 			Td_CP_Tags, Input_CP_Tags,
 			Td_CP_TimeStamp, Input_CP_TimeStamp,
-			Td_Lang, Input_Lang
+			Td_Lang, Input_Lang,
+
+			Td_CP_Border, Input_CP_Border,
+			Td_CP_Background, Input_CP_Background,
+			Td_CP_ToolbarText, Input_CP_ToolbarText,
+			Td_CP_Button_Border, Input_CP_Button_Border,
+			Td_CP_Button_BG, Input_CP_Button_BG,
+			Td_CP_SummaryBG, Input_CP_SummaryBG,
+			Td_CP_ScrBar1, Input_CP_ScrBar1,
+			Td_CP_ScrBar2, Input_CP_ScrBar2,
+			Td_CP_TEXT, Input_CP_TEXT,
+
 		];
 
 		for (let i = 0; i < removeAttribs.length; i++) {
@@ -1428,11 +1535,16 @@ function EditorMain()
 			Div_LineNumbers.style.textAlign = "left";
 			Div_LineNumbers.style.borderLeft = "1px solid #666";
 
-			Div_DropDownWin2.style.left = "9.7em";
+			Div_DropDownWin3.style.left = "10.7em";
+
+			Div_DropDownWin2.style.left = "7em";
 
 			Div_DropDownWin.style.left = "1.3em";
 
 			Input_Lang.style.left = "0.9em";
+
+			wpMinoredit.style.marginLeft = "1em";
+			wpMinoredit.style.marginRight = "0em";
 
 			for (let i = 0; i < setting_text.length; i++) {
 				setting_text[i].style.paddingLeft = "3em";
@@ -1460,11 +1572,16 @@ function EditorMain()
 			Div_LineNumbers.style.textAlign = "right";
 			Div_LineNumbers.style.borderRight = "1px solid #666";
 
-			Div_DropDownWin2.style.right = "9.7em";
+			Div_DropDownWin3.style.right = "10.7em";
+
+			Div_DropDownWin2.style.right = "7em";
 
 			Div_DropDownWin.style.right = "1.3em";
 
 			Input_Lang.style.right = "0.9em";
+
+			wpMinoredit.style.marginLeft = "0em";
+			wpMinoredit.style.marginRight = "1em";
 
 			for (let i = 0; i < setting_text.length; i++) {
 				setting_text[i].style.paddingRight = "3em";
@@ -1502,6 +1619,7 @@ function EditorMain()
 		COLOR_timestamp 			= "#40E0D0";		Input_CP_TimeStamp.value 	= "#40E0D0";
 
 		StyleMain(); // updates colors
+		
 
 		chrome.storage.sync.set({  
 			Input_CP_MultiComments:	"#228B22",
@@ -1523,6 +1641,39 @@ function EditorMain()
 				"#D2B48C", "#369FFF", "#EE69B1",
 				"#01B700", "#87CEEB", "#FFE599",
 				"#40E0D0"
+			],
+		});
+	}
+
+	function Func_ResetColors_Editor()
+	{
+		Ed_Color_Border 		= "#666666";	Input_CP_Border.value 			= "#666666"; 
+		Ed_Color_Background 	= "#202020";	Input_CP_Background.value 		= "#202020";
+		Ed_Color_ToolbarText 	= "#ffb317";	Input_CP_ToolbarText.value 		= "#ffb317";
+		Ed_Color_Button_Border 	= "#7f5400";	Input_CP_Button_Border.value 	= "#7f5400";
+		Ed_Color_Button_BG 		= "#422c00";	Input_CP_Button_BG.value 		= "#422c00";
+		Ed_Color_SummaryBG 		= "#3A3A3A";	Input_CP_SummaryBG.value 		= "#3A3A3A";
+		Ed_Color_ScrBar1 		= "#666666";	Input_CP_ScrBar1.value 			= "#666666";
+		Ed_Color_ScrBar2 		= "#2A2A2A";	Input_CP_ScrBar2.value 			= "#2A2A2A";
+		Ed_Color_TEXT 			= "#D8D7D6";	Input_CP_TEXT.value 			= "#D8D7D6";
+
+		StyleMain(); // updates colors
+		Div_StylizedCode.style.color = Ed_Color_TEXT;
+
+		chrome.storage.sync.set({  
+			Input_CP_Border: 			"#666666",
+			Input_CP_Background: 		"#202020",
+			Input_CP_ToolbarText: 		"#ffb317",
+			Input_CP_Button_Border: 	"#7f5400",
+			Input_CP_Button_BG: 		"#422c00",
+			Input_CP_SummaryBG: 		"#3A3A3A",
+			Input_CP_ScrBar1: 			"#666666",
+			Input_CP_ScrBar2: 			"#2A2A2A",
+			Input_CP_TEXT: 				"#D8D7D6",
+			Setting_ResetColors: [
+				"#666666", "#202020", "#ffb317",
+				"#7f5400", "#422c00", "#3A3A3A",
+				"#666666", "#2A2A2A", "#D8D7D6"
 			],
 		});
 	}
@@ -1573,11 +1724,13 @@ function EditorMain()
 	Div_MwTags.onclick = Func_MwTags_OnClick;
 	Div_MwTimeStamp.onclick = Func_MwTimeStamp_OnClick;
 	//============================================================
+	Div_DropDown3.onclick = Func_DropDownWindow3_OnClick;
 	Div_DropDown2.onclick = Func_DropDownWindow2_OnClick;
 	Div_DropDown.onclick = Func_DropDownWindow_OnClick;
 	Td_rtl_btn.onclick = Func_rightToLeft_OnClick;
 	Td_ResWin_btn.onclick = Func_ResetWindow;
 	Div_Reset_btn.onclick = Func_ResetColors;
+	Div_Reset_btn2.onclick = Func_ResetColors_Editor;
 	Td_ScrollNewLine_btn.onclick = Func_ScrollNewLine_OnClick;
 	//================================================================
 	//
@@ -1881,5 +2034,89 @@ function EditorMain()
 
 		chrome.storage.sync.set({ LANGUAGE: data.LANGUAGE});
 		Input_Lang.value = data.LANGUAGE
+	});
+
+	// Editor colors
+	
+	chrome.storage.sync.get('Input_CP_Border', function(data) {
+
+		chrome.storage.sync.set({ Input_CP_TimeStamp: data.Input_CP_Border});
+		Ed_Color_Border = data.Input_CP_Border;
+		Input_CP_Border.value = data.Input_CP_Border;
+
+		StyleMain();
+	});
+
+	chrome.storage.sync.get('Input_CP_Background', function(data) {
+
+		chrome.storage.sync.set({ Input_CP_Background: data.Input_CP_Background});
+		Ed_Color_Background = data.Input_CP_Background;
+		Input_CP_Background.value = data.Input_CP_Background;
+
+		StyleMain();
+	});
+
+	chrome.storage.sync.get('Input_CP_ToolbarText', function(data) {
+
+		chrome.storage.sync.set({ Input_CP_ToolbarText: data.Input_CP_ToolbarText});
+		Ed_Color_ToolbarText = data.Input_CP_ToolbarText;
+		Input_CP_ToolbarText.value = data.Input_CP_ToolbarText;
+
+		StyleMain();
+	});
+
+	chrome.storage.sync.get('Input_CP_Button_Border', function(data) {
+
+		chrome.storage.sync.set({ Input_CP_Button_Border: data.Input_CP_Button_Border});
+		Ed_Color_Button_Border = data.Input_CP_Button_Border;
+		Input_CP_Button_Border.value = data.Input_CP_Button_Border;
+
+		StyleMain();
+	});
+
+	chrome.storage.sync.get('Input_CP_Button_BG', function(data) {
+
+		chrome.storage.sync.set({ Input_CP_Button_BG: data.Input_CP_Button_BG});
+		Ed_Color_Button_BG = data.Input_CP_Button_BG;
+		Input_CP_Button_BG.value = data.Input_CP_Button_BG;
+
+		StyleMain();
+	});
+
+	chrome.storage.sync.get('Input_CP_SummaryBG', function(data) {
+
+		chrome.storage.sync.set({ Input_CP_SummaryBG: data.Input_CP_SummaryBG});
+		Ed_Color_SummaryBG = data.Input_CP_SummaryBG;
+		Input_CP_SummaryBG.value = data.Input_CP_SummaryBG;
+
+		StyleMain();
+	});
+
+	chrome.storage.sync.get('Input_CP_ScrBar1', function(data) {
+
+		chrome.storage.sync.set({ Input_CP_ScrBar1: data.Input_CP_ScrBar1});
+		Ed_Color_ScrBar1 = data.Input_CP_ScrBar1;
+		Input_CP_ScrBar1.value = data.Input_CP_ScrBar1;
+
+		StyleMain();
+	});
+
+	chrome.storage.sync.get('Input_CP_ScrBar2', function(data) {
+
+		chrome.storage.sync.set({ Input_CP_ScrBar2: data.Input_CP_ScrBar2});
+		Ed_Color_ScrBar2 = data.Input_CP_ScrBar2;
+		Input_CP_ScrBar2.value = data.Input_CP_ScrBar2;
+
+		StyleMain();
+	});
+
+	chrome.storage.sync.get('Input_CP_TEXT', function(data) {
+
+		chrome.storage.sync.set({ Input_CP_TEXT: data.Input_CP_TEXT});
+		Ed_Color_TEXT = data.Input_CP_TEXT;
+		Input_CP_TEXT.value = data.Input_CP_TEXT;
+		Div_StylizedCode.style.color = data.Input_CP_TEXT;
+
+		StyleMain();
 	});
 }

@@ -7,7 +7,7 @@
 
 var Lang_Editor = "EN";
 
-// One is here because for the "Lang_Editor" variable, the other one is to set the value
+// Set the language first, then the value
 chrome.storage.sync.get('LANGUAGE', function(data) {
 
 	chrome.storage.sync.set({ LANGUAGE: data.LANGUAGE});
@@ -33,10 +33,10 @@ function loadTranslationsSync() {
 function getTranslation(textId) {
   if (Object.keys(translations).length === 0) {
     console.error('Translations not loaded');
-    return `Missing translation for ${textId}`;
+    return `Error: "${textId}" missing!`;
   }
 
-  return translations[Lang_Editor] ? translations[Lang_Editor][textId] : `Missing translation for ${textId}`;
+  return translations[Lang_Editor] ? translations[Lang_Editor][textId] : `Error: "${textId}" missing!`;
 }
 
 loadTranslationsSync();

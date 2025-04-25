@@ -5,28 +5,31 @@
 //
 //===============================================================
 
+// Default colors
 var COLOR_multilinecomments = "#228B22";
-var COLOR_magicwords = "#40E0D0";
-var COLOR_tempmagicwords = "#40E0D0";
-var COLOR_htmlnum = "#00FCFF";
-var COLOR_htmlmnemonics = "#00FCFF";
-var COLOR_mwtags = "#5F9EA0";
-var COLOR_mwheaders = "#D2B48C";
-var COLOR_mwapost = "#369FFF";
-var COLOR_mwtemplates = "#EE69B1";
-var COLOR_mwcategories = "#01B700";
-var COLOR_mwlinks = "#87CEEB";
-var COLOR_mwfiles = "#FFE599";
-var COLOR_timestamp = "#40E0D0";
-var COLOR_numbers = "#FFB300";
+var COLOR_magicwords 		= "#40E0D0";
+var COLOR_tempmagicwords 	= "#40E0D0";
+var COLOR_htmlnum 			= "#00FCFF";
+var COLOR_htmlmnemonics 	= "#00FCFF";
+var COLOR_mwtags 			= "#5F9EA0";
+var COLOR_mwheaders			= "#D2B48C";
+var COLOR_mwapost 			= "#369FFF";
+var COLOR_mwtemplates 		= "#EE69B1";
+var COLOR_mwcategories 		= "#01B700";
+var COLOR_mwlinks 			= "#87CEEB";
+var COLOR_mwfiles 			= "#FFE599";
+var COLOR_timestamp 		= "#40E0D0";
+var COLOR_numbers 			= "#FFB300";
 
-// TODO: Make the editor able to be stylized, currently set to "gold" color.
-var Ed_Color_Border = "#666";
-var Ed_Color_Background = "";
-var Ed_Color_ToolbarText = "";
-var Ed_Color_SettingBorder = "";
-var Ed_Color_SettingBG = "";
-
+var Ed_Color_Border 		= "#666666";
+var Ed_Color_Background 	= "#202020";
+var Ed_Color_ToolbarText 	= "#ffb317";
+var Ed_Color_Button_Border 	= "#7f5400";
+var Ed_Color_Button_BG 		= "#422c00";
+var Ed_Color_SummaryBG 		= "#3A3A3A";
+var Ed_Color_ScrBar1 		= "#666666";
+var Ed_Color_ScrBar2 		= "#2A2A2A";
+var Ed_Color_TEXT 			= "#D8D7D6";
 
 var FontFamily = "monospace";
 
@@ -35,55 +38,21 @@ var Style_Extension = document.createElement('style');
 Style_Extension.id = "VDCEditorEx-Style";
 document.head.appendChild(Style_Extension);
 
-if (document.querySelector('table.diff'))
-{	
-	Style_Extension.textContent = `
+function lightenColor(hex, percent) 
+{
+    hex = hex.replace('#', '');
 
-	table.diff
-	{
-		background-color: #202020;
-		color: white;
-		border: 1px solid ${Ed_Color_Border};
-		border-radius: 4px;
-	}
+    let r = parseInt(hex.substring(0, 2), 16);
+    let g = parseInt(hex.substring(2, 4), 16);
+    let b = parseInt(hex.substring(4, 6), 16);
 
-	td.diff-otitle, td.diff-ntitle
-	{
-		background-color: #3A3A3A;
-		color: #D8D7D6;
-		border-radius: 4px;
-	}
-	
-	td.diff-deletedline, td.diff-addedline
-	{
-		color: #D8D7D6;
-		background-color: #303030;
-		border-color: ${Ed_Color_Border};
-	}
-	
-	td.diff-context
-	{
-		background: #303030;
-		color: #D8D7D6;
-		border-color: transparent;
-	}
+    r = Math.min(255, Math.floor(r + (255 - r) * (percent / 100)));
+    g = Math.min(255, Math.floor(g + (255 - g) * (percent / 100)));
+    b = Math.min(255, Math.floor(b + (255 - b) * (percent / 100)));
 
-	.diffchange
-	{
-		color: white;
-	}
-	
-	.diff-addedline .diffchange
-	{
-		background: #194C7D;
-	}
-	
-	.diff-deletedline .diffchange
-	{
-		background: #B78100;
-	}
-	`
+    return '#' + (1 << 24 | r << 16 | g << 8 | b).toString(16).slice(1).toUpperCase();
 }
+
 
 function StyleMain()
 {
@@ -149,7 +118,7 @@ function StyleMain()
 	.wikiEditor-ui-bottom
 	{
 		display: flex;
-		background: #202020;
+		background: ${Ed_Color_Background};
 	}
 
 	.wikiEditor-ui .wikiEditor-ui-top
@@ -187,7 +156,7 @@ function StyleMain()
 		display: flex;
 		align-items: center;
 		justify-content: flex-end;
-		color: #D8D7D6;
+		color: ${Ed_Color_TEXT};
 	}
 
 	#VDCEditorEx-MainWrapper
@@ -195,7 +164,7 @@ function StyleMain()
 		box-shadow: 0 10px 20px rgb(0,0,0,.6);
 		border-radius: 4px;
 		border: 1px solid ${Ed_Color_Border};
-		background: #202020;
+		background: ${Ed_Color_Background};
 		margin-bottom: 2em;
 	}
 
@@ -207,8 +176,8 @@ function StyleMain()
 		height: 500px;
 		width: 100%;
 		min-width: 256px;
-		background: #3A3A3A;
-		scrollbar-color: #666 #2A2A2A;
+		background: ${Ed_Color_SummaryBG};
+		scrollbar-color: ${Ed_Color_ScrBar1} ${Ed_Color_ScrBar2};
 		min-height: ${(FontSize * 1.5 + 4)}px;
 		tab-size: 4;
 		font-size: ${FontSize}px;
@@ -246,7 +215,7 @@ function StyleMain()
 		top: 0;
 		padding: 2px 5px;
 		/* text-align: right; */
-		background: #202020;
+		background: ${Ed_Color_Background};
 		font-family: monospace, monospace;
 		line-height: 1.5em;
 		white-space: pre-wrap;
@@ -255,7 +224,7 @@ function StyleMain()
 		/* border-right: 1px solid ${Ed_Color_Border}; */
 		display: inline-flex;
 		flex-direction: column;
-		color: #D8D7D6;
+		color: ${Ed_Color_TEXT};
 	}
 
 	editor-color
@@ -271,11 +240,10 @@ function StyleMain()
 
 	#wpSummary
 	{
-		border: 1px solid ${Ed_Color_Border};
+		border: 1px solid ${Ed_Color_Border} !important;
 		box-shadow: #0000003A 0 0 5px 3px;
-		background: #3A3A3A;
 		border-radius: 3px;
-		color: #D8D7D6;
+		color: ${Ed_Color_TEXT};
 		background-color: #3A3A3A !important
 	}
 
@@ -284,6 +252,10 @@ function StyleMain()
 		border: 1px solid #808080;
 	}
 
+	.oo-ui-fieldLayout-header
+	{
+		padding-right: 6px;	
+	}
 
 	.oo-ui-textInputWidget.oo-ui-labelElement > .oo-ui-labelElement-label
 	{
@@ -322,6 +294,18 @@ function StyleMain()
 		padding: 0.6em 0.8em;
 		color: #D8D7D6;
 		box-shadow: none;
+	}
+
+	#mw-editform-cancel
+	{
+		transition: color 200ms cubic-bezier(0.4,0.55,0.55,1);
+		background: rgb(255 0 0 / 20%);
+		border: 1px solid #783c3c;
+		border-radius: 4px;
+		padding: 0.6em 0.8em;
+		font-weight: bold;
+		box-shadow: none;
+		margin: 0.5em 0 0 0;
 	}
 
 	#wpSave:hover
@@ -530,26 +514,26 @@ function StyleMain()
 
 	.VDCEditorEx-Setting[checked="false"]:hover
 	{
-		border: 1px solid #7f5400;
-		box-shadow: inset 0 0 4px #a36c00;
+		border: 1px solid ${Ed_Color_Button_Border};
+		box-shadow: inset 0 0 4px ${lightenColor(Ed_Color_Button_Border, 20)};
 	}
 
 	.VDCEditorEx-Setting[checked="true"]
 	{
-		border: 1px solid #7f5400;
-		background: #422c00;
+		border: 1px solid ${Ed_Color_Button_Border};
+		background: ${Ed_Color_Button_BG};
 	}
 
 	.VDCEditorEx-Setting[checked="true"]:hover
 	{
-		box-shadow: inset 0 0 4px #a36c00;
+		box-shadow: inset 0 0 4px ${lightenColor(Ed_Color_Button_Border, 20)};
 	}
 
 	.VDCEditorEx-DropDown
 	{
 		background: transparent;
-		border: 1px solid #7f5400;
-		color: #ffb317; 
+		border: 1px solid ${Ed_Color_Button_Border};
+		color: ${Ed_Color_ToolbarText}; 
 		user-select: none; 
 		display: flex; 
 		gap: 4px; 
@@ -565,15 +549,15 @@ function StyleMain()
 		
 	.VDCEditorEx-DropDown:hover
 	{
-		border: 1px solid #7f5400;
-		box-shadow: inset 0 0 4px #7f5400;
+		border: 1px solid ${Ed_Color_Button_Border};
+		box-shadow: inset 0 0 4px ${Ed_Color_Button_Border};
 	}
 
 	.VDCEditorEx-ResetBtn
 	{
 		background: transparent;
-		border: 1px solid #111;
-		color: #DFDFDF; 
+		border: 1px solid ${Ed_Color_Button_Border};
+		color: ${Ed_Color_ToolbarText};
 		user-select: none; 
 		display: flex; 
 		gap: 4px; 
@@ -589,8 +573,8 @@ function StyleMain()
 
 	.VDCEditorEx-ResetBtn:hover
 	{
-		border: 1px solid #7f5400;
-		box-shadow: inset 0 0 4px #a36c00;
+		border: 1px solid ${Ed_Color_Button_Border};
+		box-shadow: inset 0 0 4px ${lightenColor(Ed_Color_Button_Border, 20)};
 	}
 
 	.VDCEditorEx-Div-Left
@@ -634,20 +618,16 @@ function StyleMain()
 		visibility: hidden;
 	}
 
-	.VDCEditorEx-Div
-	{
-		padding-bottom: 3px;
-	}
-
 	.VDCEditorEx-Td
 	{
 		align-content: center;
+		padding-bottom: 3px;
 	}
 
 	.VDCEditorEx-DropDown-Btn
 	{
 		position: absolute;
-		border: 1px solid #7f5400;
+		border: 1px solid ${Ed_Color_Button_Border};
 		border-radius: 3px;
 		display: flex;
 		align-items: center;
@@ -657,8 +637,8 @@ function StyleMain()
 
 	.VDCEditorEx-DropDown-Btn:hover
 	{
-		border: 1px solid #7f5400;
-		box-shadow: inset 0 0 4px #7f5400;
+		border: 1px solid ${Ed_Color_Button_Border};
+		box-shadow: inset 0 0 4px ${Ed_Color_Button_Border};
 	}
 
 	.VDCEditorEx-DropDown-Colorpicker
@@ -679,7 +659,7 @@ function StyleMain()
 
 	.VDCEditorEx-Selection
 	{
-		border-color: #7f5400;
+		border-color: ${Ed_Color_Button_Border};
     	border-radius: 3px;
     	position: absolute;
 	}
@@ -690,7 +670,7 @@ function StyleMain()
 	}
 	.VDCEditorEx-Input[type="text"]
 	{
-		border-color: #7f5400;
+		border-color: ${Ed_Color_Button_Border};
 		width: 40px;
 		text-align: center;
 	}

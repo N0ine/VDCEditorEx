@@ -24,8 +24,10 @@
         "Rtl":                  "Right to Left editor",
         "ResWin":               "Reset window size",
         "Language":             "Language:",
+        "Found":                "Found: ",
         "Reset":                "Reset",
         "Style":                "Style",
+        "EdStyle":              "Editor style",
         "ScrollNewLine":        "Scroll down on a new line",
         "CP_Templates":         "Templates",
         "CP_Links":             "Links",
@@ -39,7 +41,16 @@
         "CP_Multicomments":     "Multi comments",
         "CP_Post":              "Apostrophe",
         "CP_Tags":              "Wiki tags",
-        "CP_TimeStamps":        "Time stamps"
+        "CP_TimeStamps":        "Time stamps",
+        "CP_ToolbarText":       "Toolbar text",
+        "CP_Background":        "Background",
+        "CP_Button_Border":     "Button border",
+        "CP_Button_BG":         "Button background",
+        "CP_SummaryBG":         "Summary background",
+        "CP_ScrBar1":           "Scrollbar",
+        "CP_ScrBar2":           "Scrollbar background",
+        "CP_TEXT":              "Text",
+        "CP_Border":            "Border"
     },
     "HR": {
         "WordWrap":             "Prijelom riječi",
@@ -66,8 +77,10 @@
         "Rtl":                  "Urednik zdesna nalijevo",
         "ResWin":               "Poništi veličinu prozora",
         "Language":             "Jezik:",
+        "Found":                "Pronađeno: ",
         "Reset":                "Resetiraj",
         "Style":                "Stil",
+        "EdStyle":              "Stil urednika",
         "ScrollNewLine":        "Pomaknite se dolje u novom retku",
         "CP_Templates":         "Predlošci",
         "CP_Links":             "Linkovi",
@@ -81,6 +94,15 @@
         "CP_Multicomments":     "Višeredni komentari",
         "CP_Post":              "Apostrof",
         "CP_Tags":              "Wiki oznake",
-        "CP_TimeStamps":        "Vremenske oznake"
+        "CP_TimeStamps":        "Vremenske oznake",
+        "CP_ToolbarText":       "Tekst alatne trake",
+        "CP_Background":        "Pozadina",
+        "CP_Button_Border":     "Obrub gumba",
+        "CP_Button_BG":         "Pozadina gumba",
+        "CP_SummaryBG":         "Sažetak uvoda",
+        "CP_ScrBar1":           "Klizna traka",
+        "CP_ScrBar2":           "Pozadina klizna traka",
+        "CP_TEXT":              "Text",
+        "CP_Border":            "Border"
     }
 }
