@@ -908,28 +908,28 @@ function EditorMain()
 	//==================================================
 
 	const buttons = [
-		// button, 					editorBoolKey, 				storageKey
-		//[Div_WordWrap, 				"WordWrap", 					"Setting_WordWrap"	 			],
+		// button, 			editorBoolKey, 			storageKey
+		//[Div_WordWrap, 		"WordWrap", 			"Setting_WordWrap"	 		],
 		[Div_SameAsSelected, 		"HighlightSameAsSelected", 	"Setting_HighlightSameAsSelected" 	],
-		[Div_ScrollAfterLastLine, 	"ScrollNewLine", 			"Setting_ScrollAfterLastLine" 		],	
+		[Div_ScrollAfterLastLine, 	"ScrollAfterLastLine", 		"Setting_ScrollAfterLastLine" 		],	
 		// ----			
-		[Div_HTMLTagsFormatter, 	"HTMLTagsFormatter", 		"Setting_HTMLTagsFormatter"			],
-		[Div_ColoredNumbers,		"ColoredNumbers",			"Setting_ColoredNumbers"			],
-		[Div_MwMagicWords,			"MwMagicWords",				"Setting_MwMagicWords"				],
-		[Div_MwFunctions, 			"MwFunctions", 				"Setting_MwFunctions" 				],
+		[Div_HTMLTagsFormatter, 	"HTMLTagsFormatter", 		"Setting_HTMLTagsFormatter"		],
+		[Div_ColoredNumbers,		"ColoredNumbers",		"Setting_ColoredNumbers"		],
+		[Div_MwMagicWords,		"MwMagicWords",			"Setting_MwMagicWords"			],
+		[Div_MwFunctions, 		"MwFunctions", 			"Setting_MwFunctions" 			],
 		// ----
 		[Div_StylizedTemplates, 	"StylizedTemplates", 		"Setting_StylizedTemplates" 		],
-		[Div_StylizedLinks, 		"StylizedLinks", 			"Setting_StylizedLinks" 			],
-		[Div_MwHighlight, 			"MwHighlight", 				"Setting_MwHighlight" 				],
-		[Div_MwCategory, 			"MwCategory", 				"Setting_MwCategory" 				],
-		[Div_MwFile, 				"MwFile", 					"Setting_MwFile" 					],
-		[Div_TempMagicWords, 		"TempMagicWords", 			"Setting_TempMagicWords" 			],
-		[Div_MwHeader, 				"MwHeader", 				"Setting_MwHeader" 					],
-		[Div_MwMnemonics, 			"MwMnemonics", 				"Setting_MwMnemonics" 				],
-		[Div_MwMultiComments, 		"MwMultiComments", 		    "Setting_MwMultilineComments" 		],
-		[Div_MwPost, 				"MwPost", 					"Setting_MwPost" 					],
-		[Div_MwTags, 				"MwTags", 					"Setting_MwTags" 					],
-		[Div_MwTimeStamp, 			"MwTimeStamp", 				"Setting_MwTimeStamp" 				],
+		[Div_StylizedLinks, 		"StylizedLinks", 		"Setting_StylizedLinks" 		],
+		[Div_MwHighlight, 		"MwHighlight", 			"Setting_MwHighlight" 			],
+		[Div_MwCategory, 		"MwCategory", 			"Setting_MwCategory" 			],
+		[Div_MwFile, 			"MwFile", 			"Setting_MwFile" 			],
+		[Div_TempMagicWords, 		"TempMagicWords", 		"Setting_TempMagicWords" 		],
+		[Div_MwHeader, 			"MwHeader", 			"Setting_MwHeader" 			],
+		[Div_MwMnemonics, 		"MwMnemonics", 			"Setting_MwMnemonics" 			],
+		[Div_MwMultiComments, 		"MwMultiComments", 		"Setting_MwMultilineComments" 		],
+		[Div_MwPost, 			"MwPost", 			"Setting_MwPost" 			],
+		[Div_MwTags, 			"MwTags", 			"Setting_MwTags" 			],
+		[Div_MwTimeStamp, 		"MwTimeStamp", 			"Setting_MwTimeStamp" 			],
 	]
 
 	function toggleButton(button, editorBoolKey, storageKey)
