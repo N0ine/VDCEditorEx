@@ -104,7 +104,7 @@
         "CP_SummaryBG":         "Sažetak uvoda",
         "CP_ScrBar1":           "Klizna traka",
         "CP_ScrBar2":           "Pozadina klizna traka",
-        "CP_TEXT":              "Texkst",
-        "CP_Border":            "Pozadina"
+        "CP_TEXT":              "Tekst",
+        "CP_Border":            "Obrub"
     }
 }
