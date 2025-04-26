@@ -28,10 +28,11 @@
         "Reset":                "Reset",
         "Style":                "Style",
         "EdStyle":              "Editor style",
-        "ScrollNewLine":        "Scroll down on a new line",
+        "CP_Highlight":         "Highlight selection",
+        "CP_Numbers":           "Numbers",
         "CP_Templates":         "Templates",
         "CP_Links":             "Links",
-        "CP_HtmlNum":           "Html entities",
+        "CP_HtmlEnts":          "Html entities",
         "CP_Cats":              "Categories",
         "CP_File":              "Files",
         "CP_TempMW":            "Template magic words",
@@ -81,10 +82,11 @@
         "Reset":                "Resetiraj",
         "Style":                "Stil",
         "EdStyle":              "Stil urednika",
-        "ScrollNewLine":        "Pomaknite se dolje u novom retku",
+        "CP_Highlight":         "Boja odabira za isticanje",
+        "CP_Numbers":           "Brojeve",
         "CP_Templates":         "Predlošci",
         "CP_Links":             "Linkovi",
-        "CP_HtmlNum":           "Html entiteti",
+        "CP_HtmlEnts":          "Html entiteti",
         "CP_Cats":              "Kategorije",
         "CP_File":              "Datoteke",
         "CP_TempMW":            "Predložak čarobnih riječi",
@@ -102,7 +104,7 @@
         "CP_SummaryBG":         "Sažetak uvoda",
         "CP_ScrBar1":           "Klizna traka",
         "CP_ScrBar2":           "Pozadina klizna traka",
-        "CP_TEXT":              "Tekst",
-        "CP_Border":            "Obrub"
+        "CP_TEXT":              "Texkst",
+        "CP_Border":            "Pozadina"
     }
 }

@@ -22,9 +22,12 @@ const {
 	Div_MwMnemonics, 		Div_MwMultiComments, 	Div_MwPost,
 	Div_MwTags,				Div_MwTimeStamp,
 	Div_ReplaceLinks, 		Div_DropDown2, 			Div_DropDownWin2, 			Div_Reset_btn, Div_Reset_btn2,
+
+    Tr_CP_Highlight,		Td_CP_Highlight,		Input_CP_Highlight,
+    Tr_CP_Numbers,			Td_CP_Numbers,			Input_CP_Numbers,
 	Tr_CP_Templates, 		Td_CP_Templates, 		Input_CP_Templates,
 	Tr_CP_Links, 			Td_CP_Links, 			Input_CP_Links,
-	Tr_CP_HtmlNum, 			Td_CP_HtmlNum, 			Input_CP_HtmlNum,
+	Tr_CP_HtmlEnts, 		Td_CP_HtmlEnts, 		Input_CP_HtmlEnts,
 	Tr_CP_Cats, 			Td_CP_Cats, 			Input_CP_Cats,
 	Tr_CP_File, 			Td_CP_File, 			Input_CP_File,
 	Tr_CP_TempMW, 			Td_CP_TempMW, 			Input_CP_TempMW,
@@ -39,7 +42,6 @@ const {
 	Div_DropDown3,			Div_DropDownWin3,
 	Tr_rtl, 				Td_rtl, 					Td_rtl_btn,
 	Tr_ResWin, 				Td_ResWin, 					Td_ResWin_btn,
-	Tr_ScrollNewLine, 		Td_ScrollNewLine, 			Td_ScrollNewLine_btn,
 	Tr_Lang, 				Td_Lang, 					Input_Lang,
 
 	Tr_CP_Border, 			Td_CP_Border, 			Input_CP_Border,
@@ -65,22 +67,24 @@ const {
 	Div_DropDown: 'div', 			Div_DropDownWin: 'div',
 
 	// Table rows
-	Tr_CP_Templates: 'tr', 	Tr_CP_Links: 'tr', 			Tr_CP_HtmlNum: 'tr', 	Tr_CP_Cats: 'tr',
+    Tr_CP_Highlight: 'tr',	Tr_CP_Numbers: 'tr',
+	Tr_CP_Templates: 'tr', 	Tr_CP_Links: 'tr', 			Tr_CP_HtmlEnts: 'tr', 	Tr_CP_Cats: 'tr',
 	Tr_CP_File: 'tr', 		Tr_CP_TempMW: 'tr', 		Tr_CP_Header: 'tr', 	Tr_CP_MagicWords: 'tr',
 	Tr_CP_Mnemonics: 'tr', 	Tr_CP_MultiComments: 'tr', 	Tr_CP_Post: 'tr',
 	Tr_CP_Tags: 'tr', 		Tr_CP_TimeStamp: 'tr', 		Tr_rtl: 'tr', 			Tr_ResWin: 'tr',
-	Tr_ScrollNewLine: 'tr', Tr_Lang: 'tr',
+	Tr_Lang: 'tr',
 
 	Tr_CP_Border: 'tr', 	Tr_CP_Background: 'tr', 	Tr_CP_ToolbarText: 'tr',
 	Tr_CP_Button_Border: 'tr', 	Tr_CP_Button_BG: 'tr', 	Tr_CP_SummaryBG: 'tr',
 	Tr_CP_ScrBar1: 'tr', 	Tr_CP_ScrBar2: 'tr', 		Tr_CP_TEXT: 'tr',
 
 	// Table cells
-	Td_CP_Templates: 'td', 		Td_CP_Links: 'td', 			Td_CP_HtmlNum: 'td', 	Td_CP_Cats: 'td',
+    Td_CP_Highlight: 'td',		Td_CP_Numbers: 'td',
+	Td_CP_Templates: 'td', 		Td_CP_Links: 'td', 			Td_CP_HtmlEnts: 'td', 	Td_CP_Cats: 'td',
 	Td_CP_File: 'td', 			Td_CP_TempMW: 'td', 		Td_CP_Header: 'td', 	Td_CP_MagicWords: 'td',
 	Td_CP_Mnemonics: 'td', 		Td_CP_MultiComments: 'td', 	Td_CP_Post: 'td',
 	Td_CP_Tags: 'td', 			Td_CP_TimeStamp: 'td', 		Td_rtl: 'td', 			Td_rtl_btn: 'td',
-	Td_ResWin: 'td', 			Td_ResWin_btn: 'td', 		Td_ScrollNewLine: 'td',
+	Td_ResWin: 'td', 			Td_ResWin_btn: 'td',
 	Td_ScrollNewLine_btn: 'td', Td_Lang: 'td',
 
 	Td_CP_Border: 'td', 		Td_CP_Background: 'td', 	Td_CP_ToolbarText: 'td',
@@ -88,7 +92,8 @@ const {
 	Td_CP_ScrBar1: 'td',		Td_CP_ScrBar2: 'td', 		Td_CP_TEXT: 'td',
 
 	// Inputs
-	Input_CP_Templates: 'input', 		Input_CP_Links: 'input', 		Input_CP_HtmlNum: 'input',
+    Input_CP_Highlight: 'input',		Input_CP_Numbers: 'input',
+	Input_CP_Templates: 'input', 		Input_CP_Links: 'input', 		Input_CP_HtmlEnts: 'input',
 	Input_CP_Cats: 'input', 			Input_CP_File: 'input', 		Input_CP_TempMW: 'input',
 	Input_CP_Header: 'input', 			Input_CP_MagicWords: 'input', 	Input_CP_Mnemonics: 'input',
 	Input_CP_MultiComments: 'input', 	Input_CP_Post: 'input', 		Input_CP_Tags: 'input',
@@ -128,10 +133,12 @@ function getToolbarData() {
   // Style Data Table function
   function getStyleData() {
 	return [
-	  //TD element, 			translation, 							input element, 				color, 		TR element
+		//TD element, 			translation, 							input element, 				color, 		TR element
+	  [Td_CP_Highlight,			getTranslation("CP_Highlight"),			Input_CP_Highlight,			"#5d5d2c",	Tr_CP_Highlight		],
+      [Td_CP_Numbers,			getTranslation("CP_Numbers"),			Input_CP_Numbers,			"#FFB300",	Tr_CP_Numbers		],
 	  [Td_CP_Templates, 		getTranslation("CP_Templates"), 		Input_CP_Templates, 		"#EE69B1", 	Tr_CP_Templates		],
 	  [Td_CP_Links, 			getTranslation("CP_Links"), 			Input_CP_Links, 			"#87CEEB", 	Tr_CP_Links			],
-	  [Td_CP_HtmlNum, 			getTranslation("CP_HtmlNum"), 			Input_CP_HtmlNum, 			"#00FCFF", 	Tr_CP_HtmlNum		],
+	  [Td_CP_HtmlEnts, 			getTranslation("CP_HtmlEnts"), 			Input_CP_HtmlEnts, 			"#00FCFF", 	Tr_CP_HtmlEnts		],
 	  [Td_CP_Cats, 				getTranslation("CP_Cats"), 				Input_CP_Cats, 				"#01B700", 	Tr_CP_Cats			],
 	  [Td_CP_File, 				getTranslation("CP_File"), 				Input_CP_File, 				"#FFE599", 	Tr_CP_File			],
 	  [Td_CP_TempMW, 			getTranslation("CP_TempMW"), 			Input_CP_TempMW, 			"#40E0D0", 	Tr_CP_TempMW		],
@@ -151,7 +158,6 @@ function getToolbarData() {
 	  //TR element, 		TD element, 		translation, 						TD button
 	  [Tr_rtl, 				Td_rtl, 			getTranslation("Rtl"), 				Td_rtl_btn			],
 	  [Tr_ResWin, 			Td_ResWin, 			getTranslation("ResWin"), 			Td_ResWin_btn		],
-	  [Tr_ScrollNewLine, 	Td_ScrollNewLine, 	getTranslation("ScrollNewLine"), 	Td_ScrollNewLine_btn]
 	];
   }
 
@@ -222,7 +228,7 @@ function CreateToolbar()
 	//================================================================
 
 	Div_DropDown3.innerHTML = getTranslation("EdStyle");
-	Div_DropDown3.id = "DropDownButton";
+	Div_DropDown3.id = "DropDownButton3";
 	Div_DropDown3.classList.add("VDCEditorEx-DropDown");
 	Div_SubMainToolBar.appendChild(Div_DropDown3);
 
@@ -270,7 +276,7 @@ function CreateToolbar()
 	//================================================================
 
 	Div_DropDown2.innerHTML = getTranslation("Style");
-	Div_DropDown2.id = "DropDownButton";
+	Div_DropDown2.id = "DropDownButton2";
 	Div_DropDown2.classList.add("VDCEditorEx-DropDown");
 	Div_SubMainToolBar.appendChild(Div_DropDown2);
 

@@ -9,7 +9,7 @@
 var COLOR_multilinecomments = "#228B22";
 var COLOR_magicwords 		= "#40E0D0";
 var COLOR_tempmagicwords 	= "#40E0D0";
-var COLOR_htmlnum 			= "#00FCFF";
+var COLOR_htmlents 			= "#00FCFF";
 var COLOR_htmlmnemonics 	= "#00FCFF";
 var COLOR_mwtags 			= "#5F9EA0";
 var COLOR_mwheaders			= "#D2B48C";
@@ -19,7 +19,8 @@ var COLOR_mwcategories 		= "#01B700";
 var COLOR_mwlinks 			= "#87CEEB";
 var COLOR_mwfiles 			= "#FFE599";
 var COLOR_timestamp 		= "#40E0D0";
-var COLOR_numbers 			= "#FFB300";
+var COLOR_numbers			= "#FFB300";
+var COLOR_Highlight			= "#5d5d2c";	
 
 var Ed_Color_Border 		= "#666666";
 var Ed_Color_Background 	= "#202020";
@@ -38,8 +39,14 @@ var Style_Extension = document.createElement('style');
 Style_Extension.id = "VDCEditorEx-Style";
 document.head.appendChild(Style_Extension);
 
-function lightenColor(hex, percent) 
-{
+function lightenColor(hex, percent) {
+    // Check if hex is a valid string and has the '#' symbol at the start
+    if (typeof hex !== 'string' || !/^#[0-9A-F]{6}$/i.test(hex)) {
+        console.error("Invalid hex color:", hex);
+        return hex; // Return the original value if it's invalid
+    }
+
+    // Remove the '#' symbol
     hex = hex.replace('#', '');
 
     let r = parseInt(hex.substring(0, 2), 16);
@@ -50,6 +57,7 @@ function lightenColor(hex, percent)
     g = Math.min(255, Math.floor(g + (255 - g) * (percent / 100)));
     b = Math.min(255, Math.floor(b + (255 - b) * (percent / 100)));
 
+    // Return the lightened color as a hex string
     return '#' + (1 << 24 | r << 16 | g << 8 | b).toString(16).slice(1).toUpperCase();
 }
 
@@ -397,9 +405,9 @@ function StyleMain()
 		color: ${COLOR_tempmagicwords};
 	}
 
-	editor-htmlnum
+	editor-htmlents
 	{
-		color: ${COLOR_htmlnum};
+		color: ${COLOR_htmlents};
 	}
 
 	editor-htmlmnemonics
@@ -484,7 +492,7 @@ function StyleMain()
 
 	.VDCEditorEx-SameAsSelected
 	{
-		background: #ffff0030;
+		background: ${COLOR_Highlight};
 	}
 
 	.VDCEditorEx-Version {

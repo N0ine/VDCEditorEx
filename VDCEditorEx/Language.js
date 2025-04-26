@@ -8,10 +8,18 @@
 var Lang_Editor = "EN";
 
 // Set the language first, then the value
-chrome.storage.sync.get('LANGUAGE', function(data) {
+chrome.storage.local.get('LANGUAGE', function(data) {
 
-	chrome.storage.sync.set({ LANGUAGE: data.LANGUAGE});
-	Lang_Editor = data.LANGUAGE;
+  if (data.LANGUAGE == undefined) {
+    chrome.storage.local.set({ LANGUAGE: "EN"});
+    Lang_Editor = "EN";
+  }
+  else
+  {
+    Lang_Editor = data.LANGUAGE;
+	  chrome.storage.local.set({ LANGUAGE: data.LANGUAGE});	
+  }
+  
 });
 
 let translations = {};

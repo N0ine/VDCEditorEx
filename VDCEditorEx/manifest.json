@@ -47,3 +47,4 @@
 
 	"permissions": [ "activeTab", "scripting", "storage", "unlimitedStorage" ]
 }
+
