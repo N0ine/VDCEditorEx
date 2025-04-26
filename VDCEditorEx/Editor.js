@@ -316,7 +316,7 @@ function EditorMain()
 			//		 If shorter tags appear before longer ones, 
 			//		 they may match first and prevent longer tags from being matched.
 			//		 Always list longer tags before shorter ones.
-			Text = Text.replace(/(&lt;\/|&lt;)(abbr|blockquote|caption|center|cite|code|data|del|dfn|div|dl|dt|em|font|h1|h2|h3|h4|h5|h6|hr|i|ins|kbd|li|mark|p|pre|q|rp|rt|ruby|samp|small|source|span|strike|strong|sub|sup|s|table|td|th|time|tr|tt|u|var|wbr|bdi|bdo|big|br|b)([^>]*?)(\s*\/?)(>)/gs, Func_HTMLTagsFormatter);
+			Text = Text.replace(/(&lt;\/|&lt;)(abbr|blockquote|caption|center|cite|code|data|del|dfn|div|dl|dt|em|font|h1|h2|h3|h4|h5|h6|hr|i|ins|kbd|li|mark|p|pre|q|rp|rt|ruby|samp|small|source|span|strike|strong|sub|sup|s|table|td|th|time|tr|tt|u|var|wbr|bdi|bdo|big|br|b)( .*?|)(\s*\/?)(>)/gs, Func_HTMLTagsFormatter);
 		}
 
 		if(MwTags)
