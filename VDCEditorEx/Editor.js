@@ -980,6 +980,7 @@ function EditorMain()
 		}
 
 		EditorFormatting();
+		Func_ResizeEvent();
 	}
 
 	buttons.forEach(([button, editorBool, storageKey]) => { 
