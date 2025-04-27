@@ -66,6 +66,13 @@ function StyleMain()
 {
 	Style_Extension.textContent = `
 
+	.VDCEditorEx-WarningBox
+	{
+	    background-color: #442222;
+    	border-color: #b42e2e;
+	}
+	
+
 	.VDCEditorEx-ControlChars
 	{
 		color: #808080;

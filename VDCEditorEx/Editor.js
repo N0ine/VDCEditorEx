@@ -8,12 +8,42 @@
 
 var Browser = (typeof InstallTrigger !== 'undefined' ? "Firefox" : "Chrome" );
 
+async function WarnIfNewVersion()
+{
+	// Direct URL to the VDCEditor page.
+    var page = await fetch('https://developer.valvesoftware.com/wiki/User:Max34/VDCEditor');
+    var html = await page.text();
+    var parser = new DOMParser();
+    var doc = parser.parseFromString(html, 'text/html');
+
+    let latestBox = doc.getElementById("Ed-Latest");
+    let firstTd = latestBox.querySelector('td');
+
+    let version = firstTd.childNodes[0].textContent.trim(); 
+
+    if (version != "v0.1.1")
+    {
+        console.error("New version available ($1). Limited support for VDCEditorEx.", version);
+
+        let content = document.getElementById("bodyContent");
+
+        let message = document.createElement("div");
+        message.className = "VDCEditorEx-WarningBox mw-message-box";
+		message.innerHTML = `<p>A new version of <a href="https://developer.valvesoftware.com/wiki/User:Max34/VDCEditor" target="_blank">VDCEditor</a> (${version}) is available.<br><strong>VDCEditorEx has limited support and will no longer receive updates. Please switch to the latest version.</strong></p>`;
+
+        let place = content.children[4];
+        content.insertBefore(message, place.nextSibling);
+    }
+}
+
+
 if (document.body.querySelector('form textarea#wpTextbox1')) {
 	const IntervalId = setInterval(ExtensionLauncher, 150);
 
 	function ExtensionLauncher() {
 		if (document.body.querySelector(".wikiEditor-ui")) {
 			clearInterval(IntervalId);
+			WarnIfNewVersion();
 			StyleMain();
 			CreateToolbar();
 			EditorMain();	
@@ -908,28 +938,28 @@ function EditorMain()
 	//==================================================
 
 	const buttons = [
-		// button, 			editorBoolKey, 			storageKey
-		//[Div_WordWrap, 		"WordWrap", 			"Setting_WordWrap"	 		],
+		// button, 					editorBoolKey, 				storageKey
+		//[Div_WordWrap, 				"WordWrap", 					"Setting_WordWrap"	 			],
 		[Div_SameAsSelected, 		"HighlightSameAsSelected", 	"Setting_HighlightSameAsSelected" 	],
-		[Div_ScrollAfterLastLine, 	"ScrollAfterLastLine", 		"Setting_ScrollAfterLastLine" 		],	
+		[Div_ScrollAfterLastLine, 	"ScrollAfterLastLine", 			"Setting_ScrollAfterLastLine" 	],	
 		// ----			
-		[Div_HTMLTagsFormatter, 	"HTMLTagsFormatter", 		"Setting_HTMLTagsFormatter"		],
-		[Div_ColoredNumbers,		"ColoredNumbers",		"Setting_ColoredNumbers"		],
-		[Div_MwMagicWords,		"MwMagicWords",			"Setting_MwMagicWords"			],
-		[Div_MwFunctions, 		"MwFunctions", 			"Setting_MwFunctions" 			],
+		[Div_HTMLTagsFormatter, 	"HTMLTagsFormatter", 		"Setting_HTMLTagsFormatter"			],
+		[Div_ColoredNumbers,		"ColoredNumbers",			"Setting_ColoredNumbers"			],
+		[Div_MwMagicWords,			"MwMagicWords",				"Setting_MwMagicWords"				],
+		[Div_MwFunctions, 			"MwFunctions", 				"Setting_MwFunctions" 				],
 		// ----
 		[Div_StylizedTemplates, 	"StylizedTemplates", 		"Setting_StylizedTemplates" 		],
-		[Div_StylizedLinks, 		"StylizedLinks", 		"Setting_StylizedLinks" 		],
-		[Div_MwHighlight, 		"MwHighlight", 			"Setting_MwHighlight" 			],
-		[Div_MwCategory, 		"MwCategory", 			"Setting_MwCategory" 			],
-		[Div_MwFile, 			"MwFile", 			"Setting_MwFile" 			],
-		[Div_TempMagicWords, 		"TempMagicWords", 		"Setting_TempMagicWords" 		],
-		[Div_MwHeader, 			"MwHeader", 			"Setting_MwHeader" 			],
-		[Div_MwMnemonics, 		"MwMnemonics", 			"Setting_MwMnemonics" 			],
-		[Div_MwMultiComments, 		"MwMultiComments", 		"Setting_MwMultilineComments" 		],
-		[Div_MwPost, 			"MwPost", 			"Setting_MwPost" 			],
-		[Div_MwTags, 			"MwTags", 			"Setting_MwTags" 			],
-		[Div_MwTimeStamp, 		"MwTimeStamp", 			"Setting_MwTimeStamp" 			],
+		[Div_StylizedLinks, 		"StylizedLinks", 			"Setting_StylizedLinks" 			],
+		[Div_MwHighlight, 			"MwHighlight", 				"Setting_MwHighlight" 				],
+		[Div_MwCategory, 			"MwCategory", 				"Setting_MwCategory" 				],
+		[Div_MwFile, 				"MwFile", 					"Setting_MwFile" 					],
+		[Div_TempMagicWords, 		"TempMagicWords", 			"Setting_TempMagicWords" 			],
+		[Div_MwHeader, 				"MwHeader", 				"Setting_MwHeader" 					],
+		[Div_MwMnemonics, 			"MwMnemonics", 				"Setting_MwMnemonics" 				],
+		[Div_MwMultiComments, 		"MwMultiComments", 		    "Setting_MwMultilineComments" 		],
+		[Div_MwPost, 				"MwPost", 					"Setting_MwPost" 					],
+		[Div_MwTags, 				"MwTags", 					"Setting_MwTags" 					],
+		[Div_MwTimeStamp, 			"MwTimeStamp", 				"Setting_MwTimeStamp" 				],
 	]
 
 	function toggleButton(button, editorBoolKey, storageKey)
