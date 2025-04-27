@@ -1014,7 +1014,7 @@ function EditorMain()
 
 		[
 			Div_LineNumbers, Div_DropDownWin3, Div_DropDownWin2, Div_DropDownWin,
-			Td_rtl, Td_rtl_btn, Td_ResWin, Td_ResWin_btn, Td_ScrollNewLine, Td_ScrollNewLine_btn,
+			Td_rtl, Td_rtl_btn, Td_ResWin, Td_ResWin_btn,
 			Td_CP_Templates, Input_CP_Templates, Td_CP_Links, Input_CP_Links,
 			Td_CP_Cats, Input_CP_Cats, Td_CP_HtmlEnts, Input_CP_HtmlEnts, Td_CP_File, Input_CP_File,
 			Td_CP_TempMW, Input_CP_TempMW, Td_CP_Header, Input_CP_Header,
