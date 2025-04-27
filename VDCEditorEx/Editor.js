@@ -313,7 +313,7 @@ function EditorMain()
 
 	function Func_HTMLTagsFormatter(AllData, Begin, Tag, Attributes, Slash, End)
 	{
-		Attributes = Attributes.replace(/(=)(\s*?)(")(.*?)(")(\s*?)/gs, '<editor-htmltags>$1$2$3</editor-htmltags><editor-htmlattribvalues>$4</editor-htmlattribvalues><editor-htmltags>$5$6</editor-htmltags>');
+		Attributes = Attributes.replace(/(=)(.*?)(")(.*?)(")(.*?)/gs, '<editor-htmltags>$1$2$3</editor-htmltags><editor-htmlattribvalues>$4</editor-htmlattribvalues><editor-htmltags>$5$6</editor-htmltags>');
 
 		return '<editor-htmltags>' + Begin + Tag + '</editor-htmltags><editor-htmltagattribs>' + Attributes + '</editor-htmltagattribs><editor-htmltags>' + Slash + End + '</editor-htmltags>';
 	}
