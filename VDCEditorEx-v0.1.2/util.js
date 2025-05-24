@@ -77,7 +77,7 @@ data.TEMPLATES.forEach(template => {
         if (name === "__DEFAULT__") {
             css += `editor-mwtemplates { color: ${color}; }\n`;
         } else {
-            const className = 'nt-' + name.replace(/\s+/g, '');
+            const className = 'nt-' + name.toLowerCase().replace(/:/g, '-').replace(/\s+/g, '');
             css += `${className} { color: ${template.COLOR}; }\n`;
         }
     });
@@ -182,7 +182,7 @@ function parseNestedTemplates(str) {
     const nested = findAllBracedBlocks(str, 2);
     if (!nested.length) return str;
 
-    const normalizeName = s => (typeof s === "string" ? s.toLowerCase().replace(/\s+/g, '') : '');
+    const normalizeName = s => (typeof s === "string" ? s.toLowerCase().replace(/\s+/g, '').replace(/:/g, '-') : '');
 
     const noticeTemplatesSet = new Set(
         (Array.isArray(TEMPLATES) ? TEMPLATES : []).flatMap(t =>
@@ -231,21 +231,25 @@ function parseNestedTemplates(str) {
     for (let i = nested.length - 1; i >= 0; i--) {
         const tpl = nested[i];
         const original = tpl.content;
-        const match = original.match(/^{{\s*([^:|}]+)/i);
-        if (!match) continue;
+        const match = original.match(/^{{\s*([^|}]+)/i);
+        const match2 = original.match(/^{{\s*([^:|}]+)/i);
+        if (!match || !match2) continue;
 
         const nameRaw = match[1];
+        const nameRaw2 = match2[1];
         const nameNorm = normalizeName(nameRaw);
+        const nameNorm2 = normalizeName(nameRaw2);
         const tagName = 'nt-' + nameNorm;
         const inner = original.slice(2, -2);
         const rebuilt = `{{${parseNestedTemplates(inner)}}}`;
 
         let wrapped = original;
+
         if (noticeTemplatesSet.has(nameNorm)) {
             wrapped = typeof StylizedTemplates !== "undefined" && StylizedTemplates
                 ? `<${tagName}>${rebuilt}</${tagName}>`
                 : rebuilt;
-        } else if (catTemplatesSet.has(nameNorm)) {
+        } else if (catTemplatesSet.has(nameNorm2)) {
             wrapped = typeof MwCategory !== "undefined" && MwCategory
                 ? `<editor-mwcategories>${rebuilt}</editor-mwcategories>`
                 : rebuilt;
@@ -253,21 +257,21 @@ function parseNestedTemplates(str) {
             wrapped = typeof StylizedLinks !== "undefined" && StylizedLinks
                 ? `<editor-mwlinks>${rebuilt}</editor-mwlinks>`
                 : rebuilt;
-        } else if (functionsSet.has(nameNorm)) {
+        } else if (functionsSet.has(nameNorm2)) {
             wrapped = typeof MwFunctions !== "undefined" && MwFunctions
                 ? `<editor-mwfuncs>${rebuilt}</editor-mwfuncs>`
                 : (typeof StylizedTemplates !== "undefined" && StylizedTemplates
                     ? `<editor-mwtemplates>${rebuilt}</editor-mwtemplates>`
                     : rebuilt);
         } else if (
-            (mwPattern && mwPattern.test(nameRaw)) ||
-            (tempmwPattern && tempmwPattern.test(nameRaw)) ||
-            (spacePattern && spacePattern.test(nameRaw))
+            (mwPattern && mwPattern.test(nameRaw2)) ||
+            (tempmwPattern && tempmwPattern.test(nameRaw2)) ||
+            (spacePattern && spacePattern.test(nameRaw2))
         ) {
             wrapped = typeof TempMagicWords !== "undefined" && TempMagicWords
                 ? `<editor-tempmagicwords>${rebuilt}</editor-tempmagicwords>`
                 : rebuilt;
-        } else if (timeStampPattern && timeStampPattern.test(nameRaw)) {
+        } else if (timeStampPattern && timeStampPattern.test(nameRaw2)) {
             wrapped = MwTimeStamp
                 ? `<editor-timestamp>${rebuilt}</editor-timestamp>`
                 : rebuilt;
