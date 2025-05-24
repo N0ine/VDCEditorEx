@@ -62,7 +62,7 @@ const data = {
         },
         {
             "NAME": "tip",
-            "COLOR": "#ffff80"
+            "COLOR": "#ffffa0"
         },
         {
             "NAME": "warning",
