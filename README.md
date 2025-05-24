@@ -22,7 +22,7 @@ This is necessary due to the fact that browsers can block packaged extensions in
 - [Added translations for the VDCEditor](https://developer.valvesoftware.com/wiki/User:N0one/VDCEditorEx/Localization)
 - Added a button that enables/disables matching brackets for highlighting same as selection
 - Added a custom file for users to customize template coloring [Usage](VDCEditorEx-v0.1.2/templates.js)
-- Fully supported stylized templated (Not fully supported by template pages)
+- Fully supported stylized templates (Not fully supported by template pages)
 - Lots of optimizations
 
 ## Removed since v0.1.1
