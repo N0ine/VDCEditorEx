@@ -1,0 +1,625 @@
+/*/========== Valve Developer Community Editor Extended ===========///
+///
+/// Original author: Max34
+/// Extended version author: N0one
+///
+///================================================================/*/
+
+:root {
+	--color-multilinecomments: #228B22;
+	--color-magicwords: #40E0D0;
+	--color-tempmagicwords: #40E0D0;
+	--color-htmlents: #00FCFF;
+	--color-htmlmnemonics: #00FCFF;
+	--color-mwtags: #5F9EA0;
+	--color-mwheaders: #D2B48C;
+	--color-mwapost: #369FFF;
+	--color-mwtemplates: #EE69B1;
+	--color-mwcategories: #01B700;
+	--color-mwlinks: #87CEEB;
+	--color-mwfiles: #FFE599;
+	--color-timestamp: #40E0D0;
+	--color-numbers: #FFB300;
+	--color-highlight: #5d5d2c;
+
+	--ed-color-border: #666666;
+	--ed-color-background: #202020;
+	--ed-color-toolbartext: #ffb317;
+	--ed-color-button-border: #7f5400;
+	--ed-color-button-bg: #422c00;
+	--ed-color-summarybg: #3A3A3A;
+	--ed-color-scrbar1: #666666;
+	--ed-color-scrbar2: #2A2A2A;
+	--ed-color-text: #D8D7D6;
+
+	--font-family: monospace;
+	--font-size: 14px;
+
+	--resizer: none;
+}
+
+.VDCEditorEx-WarningBox {
+	background-color: #442222;
+	border-color: #b42e2e;
+}
+
+a#VDCEditorEx-Link {
+	text-decoration: none;
+	user-select: none;
+	display: flex;
+	gap: 4px;
+	align-items: center;
+	font-weight: bold;
+}
+
+.VDCEditorEx-ControlChars {
+	color: #808080;
+}
+
+.mw-editform #editpage-copywarn {
+	font-size: 11px;
+}
+
+.mw-editform #wpTextbox1 {
+	display: none;
+}
+
+form#editform {
+	margin-top: 2em;
+}
+
+.VDCEditorEx-SettingsSeparator {
+	border-left: 1px solid var(--ed-color-border);
+	margin: 0 4px;
+}
+
+.editButtons {
+	display: flex;
+	gap: .6em;
+}
+
+.oo-ui-inputWidget {
+	margin-right: 0;
+}
+
+input#wpSummary.oo-ui-inputWidget-input {
+	border-color: var(--ed-color-border);
+}
+
+.wikiEditor-ui-view.wikiEditor-ui-view-wikitext {
+	border: 0;
+}
+
+#wikiEditor-ui-toolbar {
+	background: transparent;
+	padding: 4px 6px;
+	display: flex;
+	gap: 3px;
+	-webkit-filter: invert(0) !important;
+	filter: invert(0) !important;
+}
+
+.wikiEditor-ui-bottom {
+	display: flex;
+	background: var(--ed-color-background);
+}
+
+.wikiEditor-ui .wikiEditor-ui-top {
+	border-bottom: 1px solid var(--ed-color-border) !important;
+}
+
+.mw-editform .editOptions {
+	border-radius: 0;
+	border: 0;
+	border-top: 1px solid var(--ed-color-border);
+	padding: .9em;
+	margin-bottom: 0;
+	background: transparent;
+	color: #B9B7B5;
+}
+
+#VDCEditorEx-CodeLines,
+#VDCEditorEx-SameSelection,
+#VDCEditorEx-StylizedCode,
+#VDCEditorEx-AllChars {
+	position: absolute;
+	left: 0;
+	top: 0;
+	user-select: none;
+	pointer-events: none;
+	padding: 2px 5px;
+	color: transparent;
+	width: calc(100% - 10px);
+}
+
+#VDCEditorEx-StylizedCode {
+	color: var(--ed-color-text) !important;
+}
+
+#VDCEditorEx-LineNumbers {
+	border-color: var(--ed-color-border) !important;
+}
+
+
+#VDCEditorEx-StatusBar {
+	border-top: 1px solid var(--ed-color-border);
+	padding: 4px 6px;
+	display: flex;
+	align-items: center;
+	justify-content: flex-end;
+	color: var(--ed-color-text);
+}
+
+#VDCEditorEx-MainWrapper {
+	box-shadow: 0 10px 20px rgb(0, 0, 0, .6);
+	border-radius: 4px;
+	border: 1px solid var(--ed-color-border);
+	background: var(--ed-color-background);
+	margin-bottom: 2em;
+}
+
+.wikiEditor-ui-text {
+	position: relative;
+	overflow-y: scroll;
+	resize: vertical;
+	height: 500px;
+	width: 100%;
+	min-width: 256px;
+	background: var(--ed-color-summarybg);
+	scrollbar-color: var(--ed-color-scrbar1) var(--ed-color-scrbar2);
+	min-height: calc(var(--font-size) * 1.5 + 4px);
+	tab-size: 4;
+	font-size: var(--font-size);
+	font-family: var(--font-family);
+	white-space: pre-wrap;
+	line-height: 1.5em;
+}
+
+#VDCEditorEx-Editor {
+	position: relative;
+	z-index: 1;
+	padding: 2px 5px;
+	color: transparent;
+	caret-color: white;
+	line-height: 1.5em;
+}
+
+#VDCEditorEx-Editor:focus {
+	outline: 0px solid transparent;
+}
+
+#VDCEditorEx-Editor::selection {
+	color: white;
+	background: #0C41AA;
+}
+
+#VDCEditorEx-LineNumbers {
+	position: absolute;
+	z-index: 2;
+	top: 0;
+	padding: 2px 5px;
+	background: var(--ed-color-background);
+	font-family: monospace, monospace;
+	line-height: 1.5em;
+	white-space: pre-wrap;
+	user-select: none;
+	pointer-events: none;
+	display: inline-flex;
+	flex-direction: column;
+
+	color: var(--ed-color-text);
+}
+
+.wikiEditor-ui-text::-webkit-resizer
+{
+	border: 0;
+	background: var(--resizer);
+}
+
+#wpSummary {
+	border: 1px solid var(--ed-color-border) !important;
+	box-shadow: #0000003A 0 0 5px 3px;
+	border-radius: 3px;
+	color: var(--ed-color-text);
+	background-color: #3A3A3A !important;
+}
+
+#wpSummary:focus {
+	border: 2px solid #808080 !important;
+}
+
+#wpSummary:hover {
+	background-color: #3f3f3f !important;
+}
+
+input#wpSummary:-webkit-autofill {
+	background-color: #3A3A3A !important;
+	caret-color: #D8D7D6 !important;
+	color: #D8D7D6 !important;
+	-webkit-box-shadow: 0 0 0 1000px #3A3A3A inset !important;
+	-webkit-text-fill-color: #D8D7D6 !important;
+}
+
+.oo-ui-fieldLayout-header {
+	padding-right: 6px;
+}
+
+.oo-ui-textInputWidget.oo-ui-labelElement>.oo-ui-labelElement-label {
+	display: flex;
+	align-items: center;
+	height: 100%;
+	margin: 0;
+	padding: 0.5em 0.8em 0.5em 0.5em;
+	user-select: none;
+}
+
+
+#wpPreview,
+#wpDiff {
+	transition: color 200ms cubic-bezier(0.4, 0.55, 0.55, 1), background 200ms cubic-bezier(0.4, 0.55, 0.55, 1);
+	background: linear-gradient(135deg, rgba(255 255 255 / 10%), rgba(255 255 255 / 2%));
+	border: 1px solid var(--ed-color-border);
+	border-radius: 4px;
+	padding: 0.6em 0.8em;
+	color: #D8D7D6;
+	box-shadow: none;
+}
+
+#wpPreview:hover,
+#wpDiff:hover {
+	color: white;
+	background: linear-gradient(135deg, rgba(255 255 255 / 20%), rgba(255 255 255 / 4%));
+}
+
+#wpSave {
+	transition: color 200ms cubic-bezier(0.4, 0.55, 0.55, 1);
+	background: rgba(0 255 0 / 20%);
+	border: 1px solid #3c783c;
+	border-radius: 4px;
+	padding: 0.6em 0.8em;
+	color: #D8D7D6;
+	box-shadow: none;
+}
+
+#mw-editform-cancel {
+	transition: color 200ms cubic-bezier(0.4, 0.55, 0.55, 1);
+	background: rgb(255 0 0 / 20%);
+	border: 1px solid #783c3c;
+	border-radius: 4px;
+	padding: 0.6em 0.8em;
+	font-weight: bold;
+	box-shadow: none;
+	margin: 0.5em 0 0 0;
+}
+#mw-editform-cancel .oo-ui-labelElement-label {
+	color: white;
+}
+
+#wpSave:hover {
+	color: white;
+	background: rgba(0 255 0 / 30%);
+}
+
+#mw-editform-cancel:hover {
+	color: white;
+	background: rgba(255 0 0 / 30%);
+}
+
+#mw-editform-cancel a:hover {
+	text-decoration: none !important;
+}
+
+.oo-ui-checkboxInputWidget [type = 'checkbox']+span {
+	background-color: #3A3A3A;
+	border: 1px solid var(--ed-color-border);
+}
+
+#wpMinoredit,
+#wpWatchthis,
+.oo-ui-checkboxInputWidget-checkIcon.oo-ui-widget.oo-ui-widget-enabled.oo-ui-iconElement-icon.oo-ui-icon-check.oo-ui-iconElement.oo-ui-iconWidget.oo-ui-image-invert {
+	width: 20px;
+	height: 20px;
+	border-color: var(--ed-color-border);
+	box-shadow: none;
+}
+
+.oo-ui-checkboxInputWidget [type = 'checkbox']:hover+span {
+	background-color: #366FDF3B;
+}
+
+.oo-ui-checkboxInputWidget.oo-ui-widget-enabled [type = 'checkbox']:checked+span.oo-ui-iconWidget.oo-ui-iconElement.oo-ui-iconElement-icon {
+	background-color: #143A85;
+}
+
+.oo-ui-checkboxInputWidget.oo-ui-widget-enabled [type = 'checkbox']:checked:hover+span.oo-ui-iconWidget.oo-ui-iconElement.oo-ui-iconElement-icon {
+	background-color: #1B479F;
+}
+
+
+.oo-ui-checkboxInputWidget.oo-ui-widget-enabled [type = 'checkbox']:checked:focus+span.oo-ui-iconWidget.oo-ui-iconElement.oo-ui-iconElement-icon {
+	background-color: #143A85;
+}
+
+
+.oo-ui-checkboxInputWidget.oo-ui-widget-enabled [type = 'checkbox']:checked:focus:hover+span.oo-ui-iconWidget.oo-ui-iconElement.oo-ui-iconElement-icon {
+	background-color: #1B479F;
+}
+
+
+label[for = "wpMinoredit"],
+label[for = "wpWatchthis"] {
+	cursor: pointer;
+	user-select: none;
+}
+
+.VDCEditorEx-SameAsSelected {
+	background: var(--color-highlight);
+}
+
+.VDCEditorEx-Version {
+	text-decoration: none;
+}
+
+.VDCEditorEx-Version:hover {
+	text-decoration: underline;
+}
+
+.VDCEditorEx-Setting {
+	width: 18px;
+	height: 18px;
+	border-radius: 3px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	transition: box-shadow 200ms cubic-bezier(0.4, 0.55, 0.55, 1), border 200ms cubic-bezier(0.4, 0.55, 0.55, 1);
+}
+
+.VDCEditorEx-Setting[checked = "false"] {
+	border: 1px solid transparent;
+	background: transparent;
+}
+
+.VDCEditorEx-Setting[checked = "false"]:hover {
+	border: 1px solid var(--ed-color-button-border);
+	box-shadow: inset 0 0 4px color-mix(in srgb, var(--ed-color-button-border) 100%, white 20%);
+}
+
+.VDCEditorEx-Setting[checked = "true"] {
+	border: 1px solid var(--ed-color-button-border);
+	background: var(--ed-color-button-bg);
+}
+
+.VDCEditorEx-Setting[checked = "true"]:hover {
+	box-shadow: inset 0 0 4px color-mix(in srgb, var(--ed-color-button-border) 100%, white 20%);
+}
+
+.VDCEditorEx-DropDown {
+	background: transparent;
+	border: 1px solid var(--ed-color-button-border);
+	color: var(--ed-color-toolbartext);
+	user-select: none;
+	display: flex;
+	gap: 4px;
+	font-weight: bold;
+	padding-left: 5px;
+	padding-right: 5px;
+	width: fit-content;
+	height: fit-content;
+	border-radius: 3px;
+	justify-content: center;
+	transition: box-shadow 200ms cubic-bezier(0.4, 0.55, 0.55, 1),
+	border 200ms cubic-bezier(0.4, 0.55, 0.55, 1);
+}
+
+.VDCEditorEx-DropDown:hover {
+	border: 1px solid var(--ed-color-button-border);
+	box-shadow: inset 0 0 4px color-mix(in srgb, var(--ed-color-button-border) 100%, white 20%);
+}
+
+.VDCEditorEx-ResetBtn {
+	background: transparent;
+	border: 1px solid var(--ed-color-button-border);
+	color: var(--ed-color-toolbartext);
+	user-select: none;
+	display: flex;
+	gap: 4px;
+	font-weight: bold;
+	padding-left: 5px;
+	padding-right: 5px;
+	width: fit-content;
+	height: fit-content;
+	border-radius: 3px;
+	justify-content: center;
+	transition: box-shadow 200ms cubic-bezier(0.4, 0.55, 0.55, 1),
+	border 200ms cubic-bezier(0.4, 0.55, 0.55, 1);
+}
+
+.VDCEditorEx-ResetBtn:hover {
+	border: 1px solid var(--ed-color-button-border);
+	box-shadow: inset 0 0 4px color-mix(in srgb, var(--ed-color-button-border) 100%, white 20%);
+}
+
+.VDCEditorEx-Div-Left {
+	margin-left: auto;
+}
+
+.VDCEditorEx-Div-Right {
+	margin-right: 1em;
+}
+
+.VDCEditorEx-DropDownWin {
+	position: absolute;
+	padding: 3px;
+	z-index: 2;
+	top: 30px;
+	background: #262626;
+	border-right: 1px solid var(--ed-color-border);
+	border-bottom: 1px solid var(--ed-color-border);
+	border-left: 1px solid var(--ed-color-border);
+	min-width: 12em;
+	visibility: hidden;
+}
+
+.VDCEditorEx-DropDownWin[checked = "true"] {
+	transition: visibility 0.1s linear, background 0.1s linear, opacity 0.1s linear;
+	opacity: 100;
+	background: color-mix(in srgb, var(--ed-color-background) 100%, white 5%);
+	visibility: visible;
+}
+
+.VDCEditorEx-DropDownWin[checked = "false"] {
+	transition: visibility 0.1s linear, background 0.1s linear, opacity 0.1s linear;
+	opacity: 100;
+	background: transparent;
+	visibility: hidden;
+}
+
+.VDCEditorEx-Td {
+	align-content: center;
+	padding-bottom: 3px;
+}
+
+.VDCEditorEx-DropDown-Btn {
+	position: absolute;
+	border: 1px solid var(--ed-color-button-border);
+	border-radius: 3px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	transition: box-shadow 200ms cubic-bezier(0.4, 0.55, 0.55, 1),
+	border 200ms cubic-bezier(0.4, 0.55, 0.55, 1);
+}
+
+.VDCEditorEx-DropDown-Btn:hover {
+	border: 1px solid var(--ed-color-button-border);
+	box-shadow: inset 0 0 4px color-mix(in srgb, var(--ed-color-button-border) 100%, white 20%);
+}
+
+.VDCEditorEx-DropDown-Colorpicker {
+	position: absolute;
+	border: 0px;
+	border-radius: 3px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: 0px;
+	box-sizing: border-box;
+	block-size: 22px;
+	inline-size: 19px;
+	background-color: transparent;
+	color: transparent;
+}
+
+.VDCEditorEx-Selection {
+	border-color: var(--ed-color-border);
+	border-radius: 3px;
+	position: absolute;
+}
+
+.VDCEditorEx-Input {
+	position: absolute;
+}
+
+.VDCEditorEx-Input[type = "text"] {
+	border-color: var(--ed-color-button-border);
+	width: 40px;
+	border-radius: 3px;
+	text-align: center;
+}
+
+.Input-disabled {
+	color: gray !important;
+	user-select: none;
+}
+
+.text-disabled {
+	color: gray !important;
+	user-select: none;
+	text-decoration: underline;
+}
+
+
+editor-color {
+	color: chartreuse;
+}
+
+editor-multilinecomments {
+	color: var(--color-multilinecomments) !important;
+}
+
+editor-magicwords {
+	color: var(--color-magicwords);
+}
+
+editor-tempmagicwords {
+	color: var(--color-tempmagicwords);
+}
+
+editor-htmlents {
+	color: var(--color-htmlents);
+}
+
+editor-htmlmnemonics {
+	color: var(--color-htmlmnemonics);
+}
+
+editor-htmltags {
+	color: #6495ED;
+}
+
+editor-htmltagattribs {
+	color: #B0C4DE;
+}
+
+editor-htmlattribvalues {
+	color: #FF7F50;
+}
+
+editor-mwtags {
+	color: var(--color-mwtags);
+}
+
+editor-mwheaders {
+	color: var(--color-mwheaders);
+}
+
+editor-number,
+editor-unit {
+	color: var(--color-numbers) !important;
+}
+
+editor-mwapost {
+	color: var(--color-mwapost);
+}
+
+editor-mwfunctions,
+editor-mwfunctions editor-mwtemplates {
+	color: #CD69EE;
+}
+
+editor-mwcategories,
+editor-mwcategories editor-number {
+	color: var(--color-mwcategories);
+}
+
+editor-mwlinks,
+editor-mwlinks editor-number {
+	color: var(--color-mwlinks);
+}
+
+editor-mwfiles,
+editor-mwfiles editor-number {
+	color: var(--color-mwfiles);
+}
+
+editor-mwparams {
+	color: #8E69FF;
+}
+
+editor-mwfuncs {
+	color: #cc52fe;
+}
+
+editor-timestamp {
+	color: var(--color-timestamp);
+}

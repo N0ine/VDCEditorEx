@@ -1,0 +1,49 @@
+{
+	"manifest_version": 3,
+
+	"name": "VDCEditorEx",
+
+	"version": "0.1.1",
+
+	"description": "Changes the textarea for editing pages to a more improved version. Designed for the Valve Developer Community site",
+
+	"icons": {
+		"16": "images/icons/16.png",
+		"32": "images/icons/32.png",
+		"48": "images/icons/48.png"
+	},
+
+	"action": {
+		"default_icon": {
+			"16": "images/icons/16.png",
+			"32": "images/icons/32.png",
+			"48": "images/icons/48.png"
+		},
+
+		"default_title": "Valve Developer Community Text Editor Extended"
+	},
+
+	"web_accessible_resources": [
+		{
+			"resources": [ "*" ],
+			"extension_ids": [ "*" ],
+			"matches": [ "*://*/*" ]
+		}
+	],
+
+	"content_scripts": [
+		{
+			"matches": ["https://developer.valvesoftware.com/*"],
+			"js": [ "Editor.js", "Language.js", "Toolbar.js", "templates.js", "util.js" ]
+		}
+	],
+
+	"browser_specific_settings": {
+		"gecko": {
+			"id": "VDC@EditorEx",
+			"strict_min_version": "88.0"
+		}
+	},
+
+	"permissions": [ "activeTab", "scripting", "storage", "unlimitedStorage" ]
+}
