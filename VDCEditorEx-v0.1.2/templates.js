@@ -4,7 +4,6 @@
     If you do not want to have stylized templates, then set it empty (or comment the (specific) data; not "TEMPLATES"!)
     If you do not want to color a specific template, use "inherit", 
         also i realized that it just appends the data, so you can freely add something else like a "background: #000000;"
-    ############ IMPORTANT: USE LOWERCASE NAMES  ############
     ## USAGE:
     {
         "NAME": "<name>",
@@ -19,7 +18,7 @@
 const data = {
     "TEMPLATES": [
         // These are the default values that you see any page using notice templates
-        // DO NOT COMMENT THIS ONE OUT!
+        // DO NOT COMMENT THIS ONE OUT! THIS IS THE MAIN TEMPLATE COLORING
         {
             "NAME": "__DEFAULT__",
             "USEDEFAULT": true, // This means if it doesn't find the template name in here, then color it to this default template color.
@@ -75,7 +74,19 @@ const data = {
         {
             "NAME": ["translate", "translating", "finish translation", "update translation", "machine translation"],
             "COLOR": "goldenrod"
+        }, // Example with styling
+        /*
+        {
+            "NAME": ["Half-Life 2", "hl2"],
+            "COLOR": "#E6AC39", // color used from Template:Half-Life 2
+            "STYLE": "GAME" // Type of style to apply for this template (see line 235 for the styles)
+        },
+        {
+            "NAME": "code",
+            "COLOR": "var(--ed-color-text)",
+            "STYLE": "CODE"
         }
+        */
     ],
 
     // Any templates that are a category
@@ -219,5 +230,16 @@ const data = {
             "WEEK",
             "TIMESTAMP"
         ]
-    }
+    },
+    // styles to use for TEMPLATES
+    "STYLES": [
+        { 
+            "TYPE": "GAME",
+            "STYLE": "background-color: #00000030; border-radius: 4px"
+        },
+        { 
+            "TYPE": "CODE",
+            "STYLE": "background-color: #00000042; border-radius: 4px"
+        }
+    ]
 }

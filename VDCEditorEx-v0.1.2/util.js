@@ -71,23 +71,30 @@ function addStyles(callback) {
 const style = document.createElement('style');
 let css = '';
 data.TEMPLATES.forEach(template => {
-    const names = Array.isArray(template.NAME) ? template.NAME : [template.NAME];
-    names.forEach(name => {
-        let color = template.USEDEFAULT === true ? 'var(--color-mwtemplates)' : "inherit";
-        if (name === "__DEFAULT__") {
-            css += `editor-mwtemplates { color: ${color}; }\n`;
-        } else {
-            const className = 'nt-' + name.toLowerCase().replace(/:/g, '-').replace(/\s+/g, '');
-            css += `${className} { color: ${template.COLOR}; }\n`;
-        }
-    });
+	const names = Array.isArray(template.NAME) ? template.NAME : [template.NAME];
+	const shortest = names.reduce((a, b) => a.length <= b.length ? a : b);
+	const tagName = 'nt-' + shortest.toLowerCase().replace(/:/g, '-').replace(/\s+/g, '');
+	let style = template.USEDEFAULT === true
+		? 'color: var(--color-mwtemplates);'
+		: `color: ${template.COLOR};`;
+
+	if (template.STYLE && Array.isArray(data.STYLES)) {
+		const match = data.STYLES.find(s => s.TYPE === template.STYLE);
+		if (match && match.STYLE) {
+			style += ` ${match.STYLE}`;
+		}
+	}
+	if (shortest === "__DEFAULT__") {
+		css += `editor-mwtemplates { ${style} }\n`;
+	} else {
+		css += `${tagName} { ${style} }\n`;
+	}
 });
 
 style.textContent = css;
 style.id = "VDCEditorEx-autostyles";
 document.head.appendChild(style);
 
-// Remove the __DEFAULT__ template from data.TEMPLATES
 var TEMPLATES = data.TEMPLATES.filter(t => {
     if (Array.isArray(t.NAME)) {
         return !t.NAME.includes("__DEFAULT__");
@@ -184,12 +191,13 @@ function parseNestedTemplates(str) {
 
     const normalizeName = s => (typeof s === "string" ? s.toLowerCase().replace(/\s+/g, '').replace(/:/g, '-') : '');
 
-    const noticeTemplatesSet = new Set(
-        (Array.isArray(TEMPLATES) ? TEMPLATES : []).flatMap(t =>
-            Array.isArray(t.NAME)
-                ? t.NAME.map(normalizeName).filter(Boolean)
-                : [normalizeName(t.NAME)].filter(Boolean)
-        )
+    const noticeTemplatesMap = new Map(
+        (Array.isArray(TEMPLATES) ? TEMPLATES : []).flatMap(template => {
+            const names = Array.isArray(template.NAME) ? template.NAME : [template.NAME];
+            const shortest = names.reduce((a, b) => a.length <= b.length ? a : b);
+            const normShortest = normalizeName(shortest);
+            return names.map(name => [normalizeName(name), normShortest]);
+        })
     );
     const catTemplatesSet = new Set(
         (Array.isArray(CATEGORIES) ? CATEGORIES : []).flatMap(t =>
@@ -245,7 +253,8 @@ function parseNestedTemplates(str) {
 
         let wrapped = original;
 
-        if (noticeTemplatesSet.has(nameNorm)) {
+        if (noticeTemplatesMap.has(nameNorm)) {
+            const tagName = 'nt-' + normalizeName(noticeTemplatesMap.get(nameNorm));
             wrapped = typeof StylizedTemplates !== "undefined" && StylizedTemplates
                 ? `<${tagName}>${rebuilt}</${tagName}>`
                 : rebuilt;
