@@ -200,10 +200,10 @@ function parseNestedTemplates(str) {
         })
     );
     const catTemplatesSet = new Set(
-        (Array.isArray(CATEGORIES) ? CATEGORIES : []).flatMap(t =>
-            Array.isArray(t.NAME)
-                ? t.NAME.map(normalizeName).filter(Boolean)
-                : [normalizeName(t.NAME)].filter(Boolean)
+        (Array.isArray(CATEGORIES) ? CATEGORIES : []).flatMap(name =>
+            Array.isArray(name)
+                ? name.map(normalizeName).filter(Boolean)
+                : [normalizeName(name)].filter(Boolean)
         )
     );
     const linksSet = new Set(
