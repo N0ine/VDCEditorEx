@@ -29,5 +29,5 @@ This is necessary due to the fact that browsers can block packaged extensions in
 ![The Editor](VDCEditorEx-v0.1.2/images/readme-assets/the_editor.png)
 The editor with custom stylized templates.
 
-Some of the templates shown below are custom additions and not part of the editor's built-in styles. For example, templates with dark backgrounds were added separately.
+Some of the templates shown in the image are custom additions and not part of the editor's built-in styles. For example, templates with dark backgrounds were added separately.
 That said, it doesn't mean *I* added them specifically — you can create your own with by [seeing this file](VDCEditorEx-v0.1.2/templates.js).
