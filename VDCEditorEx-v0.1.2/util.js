@@ -336,7 +336,7 @@ function parseNestedLinksCatsFiles(str) {
     for (let i = nested.length - 1; i >= 0; i--) {
         const tpl = nested[i];
         const original = tpl.content;
-        const match = original.match(/^\[\[\s*([^\]|:]+)(:[^\]|]+)?/i);
+        const match = original.match(/^\[\[:?([^\]|:]+)(:[^\]|]+)?/i);
         if (!match) continue;
 
         const inner = original.slice(2, -2);
@@ -344,7 +344,7 @@ function parseNestedLinksCatsFiles(str) {
 
         let wrapped = original;
 
-        if (/^:?(category|категория|categorie|kategorie|categoria|категорія|категория|分類|분류|カテゴリ|категорія|категория|категорія|категория|категорія|категория):/i.test(inner)) {
+        if (/^(category|категория|categorie|kategorie|categoria|категорія|категория|分類|분류|カテゴリ|категорія|категория|категорія|категория|категорія|категория):/i.test(inner)) {
             wrapped = MwFile
                 ? `<editor-mwcategories>${rebuilt}</editor-mwcategories>`
                 : rebuilt;
