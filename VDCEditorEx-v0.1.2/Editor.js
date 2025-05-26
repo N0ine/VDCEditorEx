@@ -278,7 +278,7 @@ async function EditorMain()
 	function Func_HTMLTagsFormatter(AllData, Begin, Tag, Attributes, Slash, End) {
 		Attributes = Attributes.replace(/(=)(\s*)(["'])(.*?)(\3)/g, '<editor-htmltags>$1$2$3<editor-htmlattribvalues>$4</editor-htmlattribvalues>$5</editor-htmltags>');
 
-		let attribs = Attributes.trim() !== "" ? `<editor-htmltagattribs>${Attributes}</editor-htmltagattribs>` : "";
+		let attribs = Attributes !== "" ? `<editor-htmltagattribs>${Attributes}</editor-htmltagattribs>` : "";
 
 		return `<editor-htmltags>${Begin}${Tag}${attribs}${Slash}${End}</editor-htmltags>`;
 	}
@@ -304,8 +304,8 @@ async function EditorMain()
 			// NOTE: Regex matches from left to right. 
 			//		 If shorter tags appear before longer ones, 
 			//		 they may match first and prevent longer tags from being matched.
-			//		 Also im lazy to fix this but it works for now.
-			Text = Text.replace(/(&lt;\/|&lt;)(?!categorytree|gallery|indicator|nowiki|syntaxhighlight|includeonly|onlyinclude|noinclude)(abbr|blockquote|caption|center|cite|code|data|del|dfn|div|dl|dt|em|font|h1|h2|h3|h4|h5|h6|hr|i|ins|kbd|li|mark|p|pre|q|rp|rt|ruby|samp|small|source|span|strike|strong|sub|sup|s|table|td|th|time|tr|tt|u|var|wbr|bdi|bdo|big|br|b)(.*?|)(\s*\/?)(>)/gs, Func_HTMLTagsFormatter);
+			//		 Always list longer tags before shorter ones.
+			Text = Text.replace(/(&lt;\/|&lt;)(abbr|blockquote|caption|center|cite|code|data|del|dfn|div|dl|dt|em|font|h1|h2|h3|h4|h5|h6|hr|i|ins|kbd|li|mark|p|pre|q|rp|rt|ruby|samp|small|source|span|strike|strong|sub|sup|s|table|td|th|time|tr|tt|u|var|wbr|bdi|bdo|big|br|b)( .*?|)(\s*\/?)(>)/gs, Func_HTMLTagsFormatter);
 		}
 
 		if(MwTags)
