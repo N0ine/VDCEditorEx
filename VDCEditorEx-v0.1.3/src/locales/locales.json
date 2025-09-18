@@ -1,0 +1,7 @@
+{
+  "LOCALES": [ "en" ],
+  "__COMMENT0__": "This file is used to configure the supported locales for the ext. If you are here and want to add yours    ",
+  "__COMMENT1__": "Go to this GitHub page: https://github.com/N0ine/VDCEditorEx/tree/v0.1.3/VDCEditorEx-v0.1.3/src/locales    ",
+  "__COMMENT2__": "Go to your Language, click on it, and do CTRL + SHIFT + S to download the file, place it in this dir, and add the language name in the LOCALES",
+  "__COMMENT3__": "This is to prevent the zip being bloated with languages that you won't use."
+}
