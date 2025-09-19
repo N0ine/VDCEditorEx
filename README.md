@@ -16,7 +16,7 @@ This is necessary due to the fact that browsers can block packaged extensions in
 - Added experimental features; Such as:
 	- Live summary preview
 	- Wiki table styling
-	- string counter (only on \/strings pages)
+	- string counter (only on /strings pages)
 	- Open a new tab with template name (e.g clicking the "Bug"; {{Bug|...}})
 	- Show invalid HTML tags (Check for any unclosed html tags)
 - Added a Show Hidden Characters button
@@ -36,6 +36,6 @@ This is necessary due to the fact that browsers can block packaged extensions in
 The editor with custom stylized templates.
 
 Some of the templates shown in the image are custom additions and not part of the editor's built-in styles. For example, templates with dark backgrounds were added separately.
-That said, it doesn't mean *I* added them specifically — you can create your own with by going to Preferences -> Templates.
+That said, it doesn't mean *I* added them specifically, you can create your own with by going to Preferences -> Templates.
 
-There is a json file called UserDefinedTemplates that in the <code>src/assets</code>, its the main file that has custom templates, use the import button (![Import button](VDCEditorEx-v0.1.3/images/symbols/upload.png))to add the custom templates.
+There is a json file called UserDefinedTemplates that in the <code>src/assets</code>, its the main file that has custom templates, use the import button (![Import button](VDCEditorEx-v0.1.3/images/symbols/upload.png)) to add the custom templates.

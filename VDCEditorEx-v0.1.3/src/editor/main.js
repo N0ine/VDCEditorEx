@@ -220,7 +220,6 @@ async function InitTextEditorLogic() {
 
         SummaryPreview.append(previewText + " ", SummaryText, LivePreviewInfo);
 
-
         if (first && EditorSettings.ShowLiveSummary) {
             EditOptions.insertBefore(LivePreviewInfo, first.nextSibling);
             EditOptions.insertBefore(SummaryPreview, first.nextSibling);
@@ -342,10 +341,10 @@ async function InitTextEditorLogic() {
                 const target = e.target || e;
                 let text = target.value || "";
 
-                text = text.replaceAll("<", "&lt;").replaceAll(">", "&gt;")
-                    .replaceAll("&#91;", "[").replaceAll("&#93;", "]")
-                    .replaceAll("&#124;", "|").replaceAll("&#123;", "{").replaceAll("&#125;", "}")
-                    .replaceAll("&#42;", "*").replaceAll("&#47;", "/");
+                text = text.replaceAll("&", "&amp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;")
+                    .replaceAll("&amp;#91;", "[").replaceAll("&amp;#93;", "]")
+                    .replaceAll("&amp;#124;", "|").replaceAll("&amp;#123;", "{").replaceAll("&amp;#125;", "}")
+                    .replaceAll("&amp;#42;", "*").replaceAll("&amp;#47;", "/").replace(/&amp;(#\d+|\w+);/g, "&$1;");
 
                 text = text.replace(/\/\*(.*?)\*\/([^\/]+(?=\/)|.*$)/g, (match, header, txt, offset, fullText) => {
                     const encodedName = PAGE_NAME + "#" + wikiEncode(header.trim());
