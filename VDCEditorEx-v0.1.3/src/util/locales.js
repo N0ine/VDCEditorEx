@@ -53,7 +53,7 @@ function getTranslation(tokenId, ...params) {
 
     if (token === undefined || token === null) {
         console.warn(`Missing translation for token id: ${tokenId}`);
-        return "#" + tokenId;
+        return "!#" + tokenId + "#!";
     }
 
     if (Array.isArray(token)) {

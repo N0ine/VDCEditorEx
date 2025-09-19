@@ -355,6 +355,8 @@ async function CreatePanel(filename) {
 	let html = await response.text();
 	const extURL = chrome.runtime.getURL("").replace(/\/$/, "");
 	html = html.replace(/__EXT_ID__/g, extURL);
+	html = html.replace(/_#([A-Za-z0-9-_]+)#_/g, (_, key) => { return getTranslation(key); });
+
 	return html;
 }
 
@@ -444,6 +446,16 @@ function Func_UpdateSizes() {
 	Div_LineNumbers.style.height = height;
 }
 
+let saveHeightTimeout;
+
+function saveHeight(height) {
+	clearTimeout(saveHeightTimeout);
+	saveHeightTimeout = setTimeout(() => {
+		if (height != "")
+			chrome.storage.local.set({ "VDC-Height": height });
+	}, 150);
+}
+
 function Func_ResizeEvent() {
 	if (EditorSettings.ScrollAfterLastLine) {
 		const fontSize = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--font-size')) || 14;
@@ -453,25 +465,21 @@ function Func_ResizeEvent() {
 		Div_Editor.style.paddingBottom = "2px";
 
 	Func_UpdateSizes();
+
+	saveHeight(SubMainTextArea.style.height)
 }
+
 function capitalizeFirst(str) {
 	if (!str) return str;
 	return str.charAt(0).toUpperCase() + str.slice(1);
 }
 
-function SB_Found(data) {
-	const element = document.getElementById("VDC-Found");
-	element.textContent = getTranslation("StatusBar-Found", data.toString());
-}
+function StatusBar_Info(elementId, token, ...args) {
+	const element = document.getElementById(elementId);
+	if (!element) return;
 
-function SB_Pos(data) {
-	const element = document.getElementById("VDC-Pos");
-	element.textContent = getTranslation("StatusBar-Position", data.toString());
-}
-
-function SB_Len(data) {
-	const element = document.getElementById("VDC-Len");
-	element.textContent = getTranslation("StatusBar-Length", data.toString());
+	const translation = getTranslation(token, ...args);
+	element.textContent = translation ?? "";
 }
 
 function encodeHTML(str) {
@@ -520,7 +528,7 @@ function Func_SelectionChange()
 
 		const SameSelectionCount = document.getElementById('VDCEditorEx-SameSelection').querySelectorAll('.VDCEditorEx-SameAsSelected');
 
-		SB_Found(SameSelectionCount.length);
+		StatusBar_Info("StatusBar-Found", "StatusBar-Found", SameSelectionCount.length);
 
 		setTimeout(() => {
 			const sel = window.getSelection();
@@ -529,9 +537,9 @@ function Func_SelectionChange()
 			const pos = getCursorPosition(Div_Editor, node, offset, { pos: 0, done: false });
 
 			if (Div_Editor.innerHTML.charAt(Div_Editor.innerHTML.length - 1) != '\n')
-				SB_Pos(Math.min(pos.pos, Div_Editor.textContent.length));
+				StatusBar_Info("StatusBar-Pos", "StatusBar-Position", Math.min(pos.pos, Div_Editor.textContent.length));
 			else
-				SB_Pos(Math.min(pos.pos, Div_Editor.textContent.length - 1));
+				StatusBar_Info("StatusBar-Pos", "StatusBar-Position", Math.min(pos.pos, Div_Editor.textContent.length - 1));
 		}, 0);
 	}
 	catch (e) { }
@@ -607,9 +615,7 @@ function OnKeyDown(e) {
 						if (sel == 0) {
 							var CurrentLine = Div_Editor.textContent.substring(TextAmount - Lines[i].length, TextAmount);
 
-							CurrentLine = CurrentLine.replaceAll("&", "&amp;");
-							CurrentLine = CurrentLine.replaceAll("<", '&lt;');
-							CurrentLine = CurrentLine.replaceAll(">", '&gt;');
+							CurrentLine = encodeHTML(CurrentLine);
 
 							sel.removeAllRanges();
 							const range = setCursorPosition(Div_Editor, document.createRange(), {
@@ -625,9 +631,7 @@ function OnKeyDown(e) {
 						else {
 							var string = sel.toString();
 
-							string = string.replaceAll("&", "&amp;");
-							string = string.replaceAll("<", '&lt;');
-							string = string.replaceAll(">", '&gt;');
+							string = encodeHTML(string);
 
 							sel.collapseToEnd();
 							document.execCommand('insertHTML', false, string);
@@ -739,7 +743,7 @@ function OnKeyDown(e) {
 };
 
 function highlightMatchingBracket() {
-	SB_Found(0);
+	StatusBar_Info("StatusBar-Found", "StatusBar-Found", 0);
 
 	setTimeout(() => {
 		const sel = window.getSelection();
@@ -748,9 +752,9 @@ function highlightMatchingBracket() {
 		const pos = getCursorPosition(Div_Editor, node, offset, { pos: 0, done: false });
 
 		if (Div_Editor.innerHTML.charAt(Div_Editor.innerHTML.length - 1) != '\n')
-			SB_Pos(Math.min(pos.pos, Div_Editor.textContent.length));
+			StatusBar_Info("StatusBar-Pos", "StatusBar-Position", Math.min(pos.pos, Div_Editor.textContent.length));
 		else
-			SB_Pos(Math.min(pos.pos, Div_Editor.textContent.length - 1));
+			StatusBar_Info("StatusBar-Pos", "StatusBar-Position", Math.min(pos.pos, Div_Editor.textContent.length - 1));
 	}, 0);
 
 	const sel = window.getSelection();
@@ -809,16 +813,10 @@ function highlightMatchingBracket() {
 		}
 	}
 
-	function htmlEncode(str) {
-		return str.replace(/&/g, '&amp;')
-			.replace(/</g, '&lt;')
-			.replace(/>/g, '&gt;');
-	}
-
 	if (matchPos !== -1) {
 		let html = '';
 		for (let i = 0; i < raw.length; i++) {
-			let ch = htmlEncode(raw[i]);
+			let ch = encodeHTML(raw[i]);
 			if (i === cursorOffset || i === matchPos) {
 				html += `<span class="VDCEditorEx-SameAsSelected">${ch}</span>`;
 			} else {
@@ -1100,6 +1098,8 @@ function Event_OnLocalStorageLoad() {
 						console.warn(`No button found for ${cssVar}`);
 					}
 				});
+			} else if (key === "VDC-Height" && value != "500px") {
+				SubMainTextArea.style.height = value
 			}
 		}
 	});
@@ -1175,7 +1175,7 @@ async function AsyncSummaryColorLinks(text) {
 				default: linkType = "__PENDING__";
 			}
 
-			if (linkType == "__PENDING__") // Prevent the link from turning to blue and the user to think its a working link
+			if (linkType == "__PENDING__") // Prevent the link from turning to blue and for the user to think its a working link
 				return `<span style="color: gray;" title="${linkName}">${linkShow || linkName}</span>`;
 
 			return `<a href="${linkType}" class="extiw" title="${linkName}">${linkShow || linkName}</a>`;

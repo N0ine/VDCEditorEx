@@ -26,7 +26,6 @@ if (document.body.querySelector('form textarea#wpTextbox1')) {
             InitStyles(() => {
                 SetupTemplateData();
                 WarnIfNewVersion();
-                CreateToolbar();
                 EditorMain();
             });
 
@@ -41,6 +40,7 @@ if (document.body.querySelector('form textarea#wpTextbox1')) {
         }
     }, 170);
 }
+
 
 // Initializes the UI first, then it will call the actual main function
 async function EditorMain() {
@@ -62,6 +62,11 @@ async function EditorMain() {
 
     MainEditor.parentNode.insertBefore(MainEditorWrapper, MainEditor);
     MainEditorWrapper.append(ErrorDlg, MainEditor, document.querySelector('.wikiEditor-ui-clear'), StatusBar, document.querySelector('.editOptions'));
+
+    //================================================================
+
+    const toolbar = document.getElementById("wikiEditor-ui-toolbar");
+    toolbar.innerHTML = await CreatePanel("toolbar");
 
     //================================================================
 
@@ -101,7 +106,7 @@ async function EditorMain() {
     Div_LineNumbers.id = "VDCEditorEx-LineNumbers";
     Div_LineNumbers.style.left = "0";
     Div_LineNumbers.style.textAlign = "right";
-    Div_LineNumbers.style.borderRight = "1px solid";
+    Div_LineNumbers.style.borderRight = "var(--border-size) solid";
 
     EditorSidePanel = document.createElement("div");
     EditorSidePanel.id = "VDCEditorEx-SidePanel";
@@ -133,6 +138,19 @@ async function InitTextEditorLogic() {
 
     let SearchMode = "normal";
     let ReplaceValue = "";
+
+    //================================================================
+
+    document.querySelectorAll("[data-VDCEdEx-T-setting]").forEach(button => {
+        const key = button.dataset.vdcedexTSetting;
+
+        button.addEventListener("click", (e) => {
+            e.preventDefault();
+            toggleButton(button, key);
+        });
+    });
+
+    //================================================================
 
     SearchInputMode.addEventListener("change", (e) => {
         e.preventDefault();
@@ -247,7 +265,7 @@ async function InitTextEditorLogic() {
         const pos = getCursorPosition(Div_Editor, focusNode, focusOffset, { pos: 0, done: false });
         const caretPos = Math.min(pos.pos, Div_Editor.textContent.length);
 
-        SB_Pos(caretPos);
+        StatusBar_Info("StatusBar-Pos", "StatusBar-Pos", caretPos);
     };
 
     document.addEventListener("selectionchange", Func_SelectionChange);
@@ -373,17 +391,6 @@ async function InitTextEditorLogic() {
             //SummaryInput.innerHTML = OnInput_Summary(SummaryInput);
         }
     }
-
-    setTimeout(() => {
-        document.querySelectorAll("[data-locales-title]").forEach(el => {
-            const key = el.getAttribute("data-locales-title");
-            el.title = getTranslation(key);
-        });
-        document.querySelectorAll("[data-locales-text]").forEach(el => {
-            const key = el.getAttribute("data-locales-text");
-            el.innerHTML = getTranslation(key);
-        });
-    }, 50);
 
     EDITOR_LOADED = true;
 }

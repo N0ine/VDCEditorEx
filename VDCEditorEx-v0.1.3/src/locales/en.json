@@ -43,6 +43,7 @@
   "Settings-MwFunctions":     "Stylized template parser functions and parameters",
   "Settings-ShowAllChars":    "Show all hidden characters",
   "Settings-ReplaceLinks":    "Replace links with their custom templates",
+  "Settings-ResetHeight":     "Reset editor height",
 
   "Exp-StringsCounter":       "Get a list of all languages and the count",
   "Exp-InvalidTag":           "Highlight invalid tags",

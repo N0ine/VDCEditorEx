@@ -36,7 +36,6 @@
 			"js": [
 				"src/util/locales.js",
 				"src/editor/main.js",
-				"src/editor/toolbar.js",
 				"src/util/util.js",
 				"src/util/templates_json.js",
 				"src/util/formatter.js",

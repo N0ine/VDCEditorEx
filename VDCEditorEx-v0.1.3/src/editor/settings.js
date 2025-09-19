@@ -37,6 +37,7 @@ async function getSettingHTML(name) {
 
     html = html.replace(/__Panel-UDT-Info__/g, getTranslation("Panel-UDT-Info", MAX_TEMPLATE_NAMES, MAX_TEMPLATE_PARAMS));
     html = html.replace(/__EXT_ID__/g, extURL);
+    html = html.replace(/_#([A-Za-z0-9-_]+)#_/g, (_, key) => { return getTranslation(key); });
 
     return html;
 }
@@ -137,6 +138,12 @@ function SetupSettingEvents() {
             e.preventDefault();
             toggleButton(button, key);
         });
+    });
+
+    document.getElementById("VDCEditorEx-ResetHeight")?.addEventListener("click", (e) => {
+        e.preventDefault();
+        SubMainTextArea.style.height = null;
+        chrome.storage.local.set({ "VDC-Height": "500px" });
     });
 }
 

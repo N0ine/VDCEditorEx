@@ -644,7 +644,7 @@ function EditorFormatter() {
 	if (Div_Editor.innerHTML.charAt(Div_Editor.innerHTML.length - 1) != '\n')
 		text += "\n";
 
-	SB_Len(text.length - 1);
+    StatusBar_Info("StatusBar-Len", "StatusBar-Length", text.length - 1);
 
 	text = text.replaceAll("&", "&amp;");
 	text = text.replaceAll("<", '&lt;');
