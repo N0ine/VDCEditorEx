@@ -410,8 +410,8 @@ div[id ^="VDCEditorEx-RemoveNewParam-"] {
 
 .VDCEditorEx-Colorpicker {
 	border: calc(var(--border-size) - 1px) solid var(--ed-color-border) !important;
-	width: calc(var(--border-size) + 18px);
-	height: calc(var(--border-size) + 18px);
+	width: calc(var(--border-size) + 17px);
+	height: calc(var(--border-size) + 17px);
 	color: transparent !important;
 	user-select: none;
 	background: transparent !important;
@@ -419,8 +419,8 @@ div[id ^="VDCEditorEx-RemoveNewParam-"] {
 	margin: 0;
 }
 .VDCEditorEx-Colorpicker-Params {
-	width: calc(var(--border-size) + 25px);
-	height: calc(var(--border-size) + 25px);
+	width: calc(var(--border-size) + 24px);
+	height: calc(var(--border-size) + 24px);
 	padding: 0 !important;
 	border-radius: 0 !important;
 }
