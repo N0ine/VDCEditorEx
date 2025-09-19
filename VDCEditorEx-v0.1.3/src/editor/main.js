@@ -449,7 +449,7 @@ function Func_ReplaceLinks() {
         BlurDlg.style.display = "none";
         ReplaceDlg.style.display = "none";
 
-        TextEditor = TextEditor.replace(/\[\[(?!(?:(?::)?[Cc]ategory(?:[ _]talk)?|[Dd]ictionary|[Ff]ile(?:[ _]talk)?|[Gg]oogle|[Gg]oogleGroups|[Hh]elp(?:[ _]talk)?|IMDB|[Ii]mage(?:[ _]talk)?|m|M|mw|MW|[Mm]edia|[Mm]ediaWiki(?:[ _]talk)?|[Mm]eta|[Pp]roject(?:[ _]talk)?|[Ss]dkBug|[Ss]ourceForge|[Ss]pecial|[Ss]teampowered|[Tt]alk|[Tt]emplate(?:[ _]talk)?|[Uu]ser(?:[ _]talk)?|[Vv]alve[ _][Dd]eveloper[ _][Cc]ommunity(?:[ _]talk)?|W|WP|wp|[Ww]iki|[Ww]ikiBooks|[Ww]ikipedia|[Ww]ikiquote|[Ww]iktionary|c|C|[Cc]ommons|[Ss]pecial|[Mm]etawikipedia|\#|\/):)(.+?)]]/g, "{{L|$1}}")
+        TextEditor = TextEditor.replace(/\[\[(?!(?:(?::)?[Cc]ategory(?:[ _]talk)?|[Dd]ictionary|[Ff]ile(?:[ _]talk)?|[Gg]oogle|[Gg]oogleGroups|[Hh]elp(?:[ _]talk)?|IMDB|[Ii]mage(?:[ _]talk)?|m|M|mw|MW|[Mm]edia|[Mm]ediaWiki(?:[ _]talk)?|[Mm]eta|[Pp]roject(?:[ _]talk)?|[Ss]dkBug|[Ss]ourceForge|[Ss]pecial|[Ss]teampowered|[Tt]alk|[Tt]emplate(?:[ _]talk)?|[Uu]ser(?:[ _]talk)?|[Vv]alve[ _][Dd]eveloper[ _][Cc]ommunity(?:[ _]talk)?|[Ww][Pp]?|[Ww]iki|[Ww]ikiBooks|[Ww]ikipedia|[Ww]ikiquote|[Ww]iktionary|c|C|[Cc]ommons|[Ss]pecial|[Mm]etawikipedia|\#|\/):)(.+?)]]/g, "{{L|$1}}")
         TextEditor = TextEditor.replace(/\[\[:(?:[Cc]ategory:)(.+?)]]/g, "{{LCategory|$1}}")
         TextEditor = TextEditor.replace(/\[\[(?:[Cc]ategory:)(.+?)]]/g, "{{ACategory|$1}}")
         TextEditor = TextEditor.replace(/\[\[(?:[Hh]elp:)(.+?)]]/g, "{{LHelp|$1}}")
