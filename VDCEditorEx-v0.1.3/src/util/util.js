@@ -300,6 +300,22 @@ function getImage(name) {
     return chrome.runtime.getURL(`images/${name}`);
 }
 
+
+function GenerateEditorFont() {
+	if (!document.getElementById("VDCEditorEx-FontStyle")) {
+		const fontURL = chrome.runtime.getURL("src/fonts/VDCEditor-Font.woff2");
+
+		const style = document.createElement("style");
+		style.id = "VDCEditorEx-FontStyle"
+		style.textContent = `@font-face {
+    font-family: "EditorFont";
+    src: url("${fontURL}") format("woff2");
+	unicode-range: U+0020, U+00A0, U+00B6;
+}`;
+		document.head.appendChild(style);
+	}
+}
+
 function updateCSSVariableInStylesheet(varName, value) {
 	const EditorSheet = document.getElementById("VDCEditorEx-Style");
 	if (EditorSheet) {
@@ -330,6 +346,8 @@ function InitStyles(callback) {
 			updateCSSVariableInStylesheet('--resizer', `url("${getImage('toolbar/Resizer.png')}")`);
 			updateCSSVariableInStylesheet('--TabSymbol-stopper', `url("${getImage('symbols/TabSymbol-stopper.png')}")`);
 			updateCSSVariableInStylesheet('--transBG', `url("${getImage('symbols/checkerboard.png')}")`);
+			GenerateEditorFont()
+
 			chrome.storage.local.get("VDC-STYLE", (data) => {
 				const styleTable = data["VDC-STYLE"];
 				if (!styleTable) return;
@@ -478,8 +496,7 @@ function StatusBar_Info(elementId, token, ...args) {
 	const element = document.getElementById(elementId);
 	if (!element) return;
 
-	const translation = getTranslation(token, ...args);
-	element.textContent = translation ?? "";
+	element.textContent = getTranslation(token, ...args);
 }
 
 function encodeHTML(str) {
@@ -1035,7 +1052,8 @@ function alphaToHex(alphaPercent) {
 function hexAlphaToPercent(hex) {
 	const alphaHex = hex.length === 9 ? hex.slice(7, 9) : hex;
 	const alphaDecimal = parseInt(alphaHex, 16);
-	return (alphaDecimal / 255) * 100;
+	console.log(Math.floor((alphaDecimal / 255) * 100))
+	return Math.floor((alphaDecimal / 255) * 100);
 }
 
 function cssColorToHex(color) {
@@ -1063,6 +1081,8 @@ function Event_OnLoad() {
 			if (key.startsWith("VDC-T-") || key.startsWith("VDC-S-")) {
 				const BoolValueKey = key.replace(/^VDC-T-|^VDC-S-/, "");
 				EditorSettings[BoolValueKey] = value;
+			} else if (key == "VDC-S-WordWrap" && value == false) {
+					SubMainTextArea.style.overflowX = null;
 			}
 		}
 	});
@@ -1154,6 +1174,7 @@ async function AsyncSummaryColorLinks(text) {
 			let title = await getMessageTranslation("red-link-title");
 			let trueTitle = title.replace("$1", linkName)
 
+			// Although wiki just uses the default red link, this is a bit (probably not) helpful if someone wants to upload a file.
 			if (linkName.startsWith("File:")) {
 				return `<a href="/w/index.php?title=Special:Upload&wpDestFile=${wikiEncode(linkName)}" class="new" title="${trueTitle}">${linkShow || linkName}</a>`;
 			}

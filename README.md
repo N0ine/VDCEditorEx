@@ -34,8 +34,8 @@ That said, it doesn't mean *I* added them specifically, you can create your own 
 
 There is a json file called UserDefinedTemplates that in the <code>src/assets</code>, its the main file that has custom templates, use the import button (![Import button](VDCEditorEx-v0.1.3/images/symbols/upload.png)) to add the custom templates.
 
+The editor with custom stylized templates:
 ![On Template pages](VDCEditorEx-v0.1.3/images/assets/Ed-Templates.png)
 ![On any other pages](VDCEditorEx-v0.1.3/images/assets/Ed-Pages.png)
 ![Using the search mode](VDCEditorEx-v0.1.3/images/assets/Ed-Search.png)
 ![Using Show Hidden Chars](VDCEditorEx-v0.1.3/images/assets/Ed-ShowAllChars.png)
-The editor with custom stylized templates.

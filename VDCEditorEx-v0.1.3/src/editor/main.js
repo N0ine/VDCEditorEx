@@ -53,6 +53,8 @@ async function EditorMain() {
     MainEditorWrapper = document.createElement('div');
     MainEditorWrapper.id = "VDCEditorEx-MainWrapper";
 
+    SubMainTextArea.style.overflowX = "clip";
+
     let ErrorDlg = await CreateErrorDialog();
 
     const StatusBar = document.createElement('div');
@@ -256,18 +258,6 @@ async function InitTextEditorLogic() {
     document.getElementById('wpPreview').onclick = Func_MoveBackToTextarea;
     document.getElementById('wpDiff').onclick = Func_MoveBackToTextarea;
 
-    listener.onkeydown = function (ev) {
-        
-        const sel = window.getSelection();
-        if (!sel?.focusNode) return;
-
-        const { focusNode, focusOffset } = sel;
-        const pos = getCursorPosition(Div_Editor, focusNode, focusOffset, { pos: 0, done: false });
-        const caretPos = Math.min(pos.pos, Div_Editor.textContent.length);
-
-        StatusBar_Info("StatusBar-Pos", "StatusBar-Pos", caretPos);
-    };
-
     document.addEventListener("selectionchange", Func_SelectionChange);
 
     Div_Editor.addEventListener('input', () => {
@@ -333,8 +323,7 @@ async function InitTextEditorLogic() {
     // Idk why it wont fire on the proxy, but this works, but im lazy as of now so... im leaving it like this
     if (EditorSettings.TemplatePageTab) {
         TemplatePage_addEventListener();
-    }
-    else {
+    } else {
         TemplatePage_removeEventListener();
     }
 
@@ -379,7 +368,7 @@ async function InitTextEditorLogic() {
                 text = SummaryColorLinks(text);
                 SummaryText.innerHTML = "(" + text.trim() + ")";
 
-                // AsyncSummaryColorLinks() uses the VDCs API, so to prevent too many requests, delaying this prevents overload on the api
+                // AsyncSummaryColorLinks() uses the VDCs API, so delaying this is to prevent too many requests.
                 summaryTimer = setTimeout(async () => {
                     PendingText = await AsyncSummaryColorLinks(PendingText);
 

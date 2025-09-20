@@ -608,19 +608,17 @@ function Func_MainTagsFormatter(text) {
 }
 
 function ShowAllCharacters(text) {
-    return text.replace(/(<[^>]+>|[^<]+)/g, (m, isTag) => {
+    return text.replace(/(<[^>]+>|[^<]+)/g, (m) => {
         if (m.startsWith("<")) return m;
         if (EditorSettings.WordWrap) {         
-            return m
-                .replace(/ /g, "<editor-space-w> </editor-space-w>")
-                .replace(/\t/g, "<editor-tab-w>$&</editor-tab-w>")
-                .replace(/\n/g, "<editor-endl-w><br></editor-endl-w>");
+            return m.replace(/ /g, "<editor-space-w> </editor-space-w>")
+                    .replace(/\t/g, "<editor-tab-w>$&</editor-tab-w>")
+                    .replace(/\n/g, "<editor-endl-w>&#182;</editor-endl-w><br>");
         }
         else {
-            return m
-                .replace(/ /g, "<editor-space> </editor-space>")
-                .replace(/\t/g, "<editor-tab>$&</editor-tab>")
-                .replace(/\n/g, "<editor-endl><br></editor-endl>");
+            return m.replace(/ /g, "<editor-space> </editor-space>")
+                    .replace(/\t/g, "<editor-tab>$&</editor-tab>")
+                    .replace(/\n/g, "<editor-endl>&#182;</editor-endl><br>");
         }
     });
 }
@@ -634,7 +632,7 @@ function updateChars(text) {
 
     charsUpdateTimeout = setTimeout(() => {
         Div_StylizedCode.innerHTML = ShowAllCharacters(text);
-    }, 200);
+    }, 100);
 }
 
 function EditorFormatter() {
@@ -646,9 +644,8 @@ function EditorFormatter() {
 
     StatusBar_Info("StatusBar-Len", "StatusBar-Length", text.length - 1);
 
-	text = text.replaceAll("&", "&amp;");
-	text = text.replaceAll("<", '&lt;');
-	text = text.replaceAll(">", '&gt;');
+    text = encodeHTML(text);
+
 
 	text = text.substring(0, text.length - 1);
 

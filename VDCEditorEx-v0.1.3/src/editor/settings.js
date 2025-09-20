@@ -469,7 +469,7 @@ function CreateNewTemplateBlock(templateCount, UDTNameLen = 1, UDTParamLen = 1) 
     EnableBackgroundBtn.classList.add("VDCEditorEx-TemplateBtn", "VDCEditorEx-Settings-Btn", "oo-ui-icon-check", "oo-ui-image-invert")
     EnableBackgroundBtn.setAttribute("checked", "false")
 
-    const ColorPickerBGInput = document.createElement("input");
+    const ColorPickerBGInput = document.createElement("input");   
     ColorPickerBGInput.dataset.templateBlock = "Block-" + templateCount;
     ColorPickerBGInput.id = "Input-Block-" + templateCount + "-BG";
     ColorPickerBGInput.dataset.type = "BG-Color";
@@ -907,23 +907,22 @@ function Event_OnImportedData(data, ClearCurrentData = false) {
         if (blockData.TemplateBackgroundColor && blockData.TemplateBGTrans) {
             const bgInput = document.getElementById(`Input-Block-${templateCount}-BG`);
             const bgBtn = document.querySelector(`#Settings-Temp-Block-${templateCount} .VDCEditorEx-Settings-Btn`);
-            const bgTransDiv = document.getElementById(`Div-Block-${templateCount}-BGTrans`)
-            const bgTransSlider = document.getElementById(`Div-Block-${templateCount}-BGTrans`)
-            const BtTransText = document.getElementById(`Input-Block-${templateCount}-BGTrans`)
-            bgInput.value = blockData.TemplateBackgroundColor.slice(0, -2);
+            const bgTransDiv = document.getElementById(`Div-Block-${templateCount}-BGTrans`);
+            const bgTransSlider = document.getElementById(`Input-Block-${templateCount}-BGTrans`);
+            const BtTransText = document.getElementById(`Text-Block-${templateCount}-BGTrans`);
+            bgInput.value = blockData.TemplateBackgroundColor;
             bgInput.style.display = "unset";
             bgBtn.setAttribute("checked", "true");
-            ThisData["TemplateBackgroundColor"] = blockData.TemplateBackgroundColor;
 
+            ThisData["TemplateBackgroundColor"] = blockData.TemplateBackgroundColor;
             ThisData["TemplateBGTrans"] = blockData.TemplateBGTrans;
 
             if (!bgTransDiv && !BtTransText) return;
 
             bgTransDiv.style.display = "flex"
             bgTransSlider.value = hexAlphaToPercent(blockData.TemplateBGTrans);
-            bgTransSlider.style.backgroundImage = `linear-gradient(90deg, transparent, ${blockData.TemplateBGTrans}), var(--transBG)`;
+            bgTransSlider.style.backgroundImage = `linear-gradient(90deg, transparent, ${blockData.TemplateBackgroundColor}), var(--transBG)`;
             BtTransText.textContent = hexAlphaToPercent(blockData.TemplateBGTrans) + "%";
-
         }
 
         if (blockData.NAMES) {
@@ -948,7 +947,7 @@ function Event_OnImportedData(data, ClearCurrentData = false) {
                         ThisData["NAMES"][NameIndex] = capitalizeFirst(CloneNameInput.value);
 
                         if (CloneNameInput.value == "")
-                            delete ThisData["NAMES"][NameIndex]
+                            delete ThisData["NAMES"][NameIndex];
                     });
 
                     CloneNameInput.addEventListener("keydown", (event) => {
@@ -973,7 +972,7 @@ function Event_OnImportedData(data, ClearCurrentData = false) {
                     paramInput.value = param;
                 } else {
                     const ParamFlex = document.createElement("div");
-                    ParamFlex.classList.add("VDCEditorEx-Template-Flex")
+                    ParamFlex.classList.add("VDCEditorEx-Template-Flex");
                     ParamFlex.dataset.index = idx;
 
                     const ParamInputId = `Block-${templateCount}-Params-Index-1`;
@@ -999,7 +998,7 @@ function Event_OnImportedData(data, ClearCurrentData = false) {
                         ThisData["PARAMS"][NameIndex] = capitalizeFirst(CloneParamInput.value);
 
                         if (CloneParamInput.value == "")
-                            delete ThisData["PARAMS"][NameIndex]
+                            delete ThisData["PARAMS"][NameIndex];
                     });
 
                     CloneParamInput.addEventListener("keydown", (event) => {
@@ -1015,7 +1014,7 @@ function Event_OnImportedData(data, ClearCurrentData = false) {
                         ThisData["PARAMS_COLOR"][NameIndex] = CloneParamInputClr.value;
 
                         if (CloneParamInput.value == "")
-                            delete ThisData["PARAMS_COLOR"][NameIndex]
+                            delete ThisData["PARAMS_COLOR"][NameIndex];
                     });
                 }
 
@@ -1033,10 +1032,10 @@ function Event_OnImportedData(data, ClearCurrentData = false) {
 
     let NewCount = Math.max(...Object.keys(data).map(k => parseInt(k.split("-")[1])));
     if (NewCount != "NaN") {
-        TEMPLATE_COUNT = NewCount
+        TEMPLATE_COUNT = NewCount;
     }
     else {
-        throw new EditorError("Trying to get a number but got a NaN, failed to set up the editor correctly", "STORAGE_FAILURE")
+        throw new EditorError("Trying to get a number but got a NaN, failed to set up the editor correctly", "STORAGE_FAILURE");
     }
 }
 

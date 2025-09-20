@@ -41,6 +41,7 @@
 
 	--invalidtag: #ed1d1d;
 
+	--font-family-formatter: EditorFont, monospace;
 	--font-family: monospace;
 	--font-size: 14px;
 	--border-size: 1px;
@@ -48,6 +49,8 @@
 	--TabSymbol-stopper: none;
 	--transBG: none;
 }
+
+/* ========================================================= */
 
 input, select {
 	border-width: var(--border-size);
@@ -302,14 +305,13 @@ input#wpSummary.oo-ui-inputWidget-input {
 	top: 0;
 	padding: 2px 5px;
 	background: var(--ed-color-background);
-	font-family: monospace, monospace;
+	font-family: var(--font-family);
 	line-height: 1.5em;
 	white-space: pre-wrap;
 	user-select: none;
 	pointer-events: none;
 	display: inline-flex;
 	flex-direction: column;
-
 	color: var(--ed-color-text);
 }
 
@@ -806,24 +808,21 @@ editor-space:before {
 }
 
 editor-endl {
+	color: #808080;
+	width: 0;
+	display: inline-flex;
 	position: relative;
 	white-space: pre;
-	font-family: monospace;
+	font-family: var(--font-family-formatter) !important;
 }
 
 editor-endl-w {
+	color: #808080;
+	width: 0;
+	display: inline-flex;
 	position: relative;
 	white-space: pre-wrap;
-	font-family: monospace;
-}
-
-editor-endl-w:before,
-editor-endl:before {
-	font-family: none;
-	content: "\00B6";
-	color: #808080;
-	position: absolute;
-	left: 0;
+	font-family: var(--font-family-formatter) !important;
 }
 
 editor-tab {
