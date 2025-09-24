@@ -27,6 +27,7 @@ var Div_CodeLines = undefined;
 var Div_StylizedCode = undefined;
 var Div_Editor = undefined;
 var Div_LineNumbers = undefined;
+// var Div_UserSelect = undefined;
 var SettingsPanelBtn = undefined;
 var SettingsPanel = undefined;
 var SearchPanelBtn = undefined;
@@ -106,6 +107,7 @@ function Event_OnSettingsChanged(key, value, oldValue) {
         throw new EditorError("This is a test error, you have clicked on the button to throw the error.", "TEST_ERROR");
 	}
 
+
 	if (key == "WordWrap") {
 		const whiteSpaceValue = value ? "break-spaces" : "pre";
 		[Div_StylizedCode, Div_SameSelection, Div_CodeLines, Div_Editor].forEach(el => {
@@ -113,6 +115,7 @@ function Event_OnSettingsChanged(key, value, oldValue) {
 		});
 		Div_Editor.style.minWidth = value ? "unset" : "fit-content";
 		Div_Editor.style.paddingRight = value ? "5px" : "128px";
+		SubMainTextArea.style.overflowX = value ? "clip" : null;
 	}
 
 	EditorFormatter();
@@ -380,6 +383,42 @@ async function CreatePanel(filename) {
 
 function Func_MoveBackToTextarea() { Textarea_Code.value = Div_Editor.textContent; }
 
+/**
+ * Adds a custom wrapped element for making the mouse selection stand out.
+ */
+function SetCustomSelection(startPos, endPos) {
+	const searchContainer = document.getElementById("VDCEditorEx-UserSelect");
+	if (!searchContainer || !Div_Editor) return;
+
+	let text = Div_Editor.textContent;
+
+	searchContainer.innerHTML = encodeHTML(text);
+
+	const node = searchContainer.firstChild;
+	if (!node || node.nodeType !== Node.TEXT_NODE) return;
+
+	let range;
+	if (startPos !== undefined && endPos !== undefined) {
+		range = document.createRange();
+		range.setStart(node, startPos);
+		range.setEnd(node, endPos);
+	} else {
+		const sel = window.getSelection();
+		if (!sel.rangeCount) return;
+		const mainRange = sel.getRangeAt(0);
+
+		range = document.createRange();
+		range.setStart(node, mainRange.startOffset);
+		range.setEnd(node, mainRange.endOffset);
+	}
+
+	const wrapper = document.createElement("editor-user-selection");
+	range.surroundContents(wrapper);
+
+	let wrapped = document.querySelector("editor-user-selection");
+	if (wrapped) wrapped.innerHTML = wrapped.innerHTML.replace(/\n/g, "<editor-endl-w> </editor-endl-w><br>");
+}
+
 function getCursorPosition(parent, node, offset, stat) {
 	if (stat.done) return stat;
 
@@ -527,7 +566,7 @@ function Func_SelectionChange()
 
 				while ((match = regex.exec(raw)) !== null) {
 					result += encodeHTML(raw.slice(lastIndex, match.index));
-					result += `<span class="VDCEditorEx-SameAsSelected">${encodeHTML(match[0])}</span>`;
+					result += `<editor-same-selection>${encodeHTML(match[0])}</editor-same-selection>`;
 					lastIndex = match.index + match[0].length;
 					if (match.index === regex.lastIndex) regex.lastIndex++;
 				}
@@ -543,7 +582,7 @@ function Func_SelectionChange()
 		else
 			Div_SameSelection.innerHTML = "";
 
-		const SameSelectionCount = document.getElementById('VDCEditorEx-SameSelection').querySelectorAll('.VDCEditorEx-SameAsSelected');
+		const SameSelectionCount = document.getElementById('VDCEditorEx-SameSelection').querySelectorAll('editor-same-selection');
 
 		StatusBar_Info("StatusBar-Found", "StatusBar-Found", SameSelectionCount.length);
 
@@ -736,7 +775,6 @@ function OnKeyDown(e) {
 			if (e.ctrlKey) {
 				e.preventDefault();
 
-
                 SearchPanel.style.display = "block";
 				const input = document.getElementById("VDCEditorEx-Search");
 				if (input) {
@@ -744,8 +782,6 @@ function OnKeyDown(e) {
 					input.value = sel;
 					input.textContent = sel;
 					input.focus();
-
-					console.log(sel)
 
 					const SearchInputCaseIns = document.getElementById("VDCEditorEx-Search-Ins");
 					const SearchInputMode = document.getElementById("VDCEditorEx-Search-Mode");
@@ -835,7 +871,7 @@ function highlightMatchingBracket() {
 		for (let i = 0; i < raw.length; i++) {
 			let ch = encodeHTML(raw[i]);
 			if (i === cursorOffset || i === matchPos) {
-				html += `<span class="VDCEditorEx-SameAsSelected">${ch}</span>`;
+				html += `<editor-same-selection>${ch}</editor-same-selection>`;
 			} else {
 				html += ch;
 			}
@@ -853,16 +889,10 @@ function SearchMsg(message, type, clearAfter = 5000) {
 
 	let color = "inherit";
 
-	switch (type) {
-		case "good":
-		case 1:
-			color = "#8bc34a";
-			break;
-		case "bad":
-		case 0:
-		default:
-			color = "#c34a4a";
-			break;
+	switch (type) {	
+		case 1: case "good":  color = "#8bc34a"; break;
+		case 0: case "bad":
+		default: color = "#c34a4a"; break;
 	}
 
 	SearchInfoDlg.innerHTML = `<span style="color: ${color}">${message}</span>`;
@@ -934,12 +964,12 @@ function EditorFindNext(text, caseIns, mode) {
 	const match = findMatches[currentIndex];
 
 	const before = encodeHTML(rawContent.slice(0, match.start));
-	const mid = `<span class="VDCEditorEx-SameAsSelected">${encodeHTML(match.text)}</span>`;
+	const mid = `<editor-same-selection>${encodeHTML(match.text)}</editor-same-selection>`;
 	const after = encodeHTML(rawContent.slice(match.end));
 
 	Div_SearchCode.innerHTML = before + mid + after;
 
-	const span = Div_SearchCode.querySelector(".VDCEditorEx-SameAsSelected");
+	const span = Div_SearchCode.querySelector("editor-same-selection");
 	if (span) {
 		const offsetTop = span.offsetTop;
 		const targetScroll = offsetTop - SubMainTextArea.clientHeight / 2;
@@ -982,7 +1012,7 @@ function EditorSearch(text, caseIns, mode) {
 
 	while ((match = regex.exec(raw)) !== null) {
 		result += encodeHTML(raw.slice(lastIndex, match.index));
-		result += `<span class="VDCEditorEx-SameAsSelected">${encodeHTML(match[0])}</span>`;
+		result += `<editor-same-selection>${encodeHTML(match[0])}</editor-same-selection>`;
 		lastIndex = match.index + match[0].length;
 		if (match.index === regex.lastIndex) regex.lastIndex++;
 	}
@@ -1052,7 +1082,6 @@ function alphaToHex(alphaPercent) {
 function hexAlphaToPercent(hex) {
 	const alphaHex = hex.length === 9 ? hex.slice(7, 9) : hex;
 	const alphaDecimal = parseInt(alphaHex, 16);
-	console.log(Math.floor((alphaDecimal / 255) * 100))
 	return Math.floor((alphaDecimal / 255) * 100);
 }
 
@@ -1081,8 +1110,6 @@ function Event_OnLoad() {
 			if (key.startsWith("VDC-T-") || key.startsWith("VDC-S-")) {
 				const BoolValueKey = key.replace(/^VDC-T-|^VDC-S-/, "");
 				EditorSettings[BoolValueKey] = value;
-			} else if (key == "VDC-S-WordWrap" && value == false) {
-					SubMainTextArea.style.overflowX = null;
 			}
 		}
 	});
@@ -1090,9 +1117,7 @@ function Event_OnLoad() {
 
 function Event_OnLocalStorageLoad() {
 	chrome.storage.local.get(null, (items) => {
-		if (!items || Object.keys(items).length === 0) {
-			return;
-		}
+		if (!items || Object.keys(items).length === 0) { return; }
 
 		for (const [key, value] of Object.entries(items)) {
 			if ((key.startsWith("VDC-T-") || key.startsWith("VDC-S-")) && key != "VDC-STYLE") {
@@ -1108,6 +1133,11 @@ function Event_OnLocalStorageLoad() {
 				} else if (button2) {
 					button2.setAttribute("checked", value ? "true" : "false");
 				}
+
+				if (BoolValueKey == "WordWrap") {
+					SubMainTextArea.style.overflowX = value ? "clip" : null;
+				}
+
 			} else if (key === "VDC-STYLE") {
 				Object.entries(value).forEach(([cssVar, cssValue]) => {
 					const button = document.querySelector(`[data-VDCEdEx-S-style="${cssVar}"]`);
@@ -1119,11 +1149,10 @@ function Event_OnLocalStorageLoad() {
 					}
 				});
 			} else if (key === "VDC-Height" && value != "500px") {
-				SubMainTextArea.style.height = value
+				SubMainTextArea.style.height = value;
 			}
 		}
 	});
-
 	Event_OnUDTLocalStorageLoad();
 }
 
@@ -1150,6 +1179,49 @@ async function getMessageTranslation(messageKey) {
 	// allmessages is an array, usually with 1 item if you queried a single key
 	const msgObj = allmessages[0];
 	return msgObj ? msgObj['*'] : null;
+}
+
+// Cache the interwiki map so we don#t fetch it repeatedly
+let interwikiCache = null;
+
+async function getInterwikiMap() {
+	if (interwikiCache) return interwikiCache;
+
+	const response = await VDC_API("?action=query&meta=siteinfo&siprop=interwikimap&format=json");
+
+	interwikiCache = {};
+	if (response?.query?.interwikimap) {
+		for (const iw of response.query.interwikimap) {
+			interwikiCache[iw.prefix.toLowerCase()] = iw.url;
+		}
+	}
+	return interwikiCache;
+}
+
+/**
+ * Returns a link if the wiki has the wiki site
+ * @param {String} linkName
+ * @param {String} linkShow
+ * @returns {String}
+ */
+async function renderInterwiki(linkName, linkShow) {
+	let [prefix, ...restParts] = linkName.split(":");
+	const pagePart = restParts.join(":");
+
+	if (prefix.toUpperCase() === "GOOGLE") {
+		return `<a href="https://www.google.com/search?q=${wikiEncode(pagePart)}" class="extiw" title="${linkName}">${linkShow || linkName}</a>`;
+	}
+
+	const iwMap = await getInterwikiMap();
+	const iwUrlTemplate = iwMap[prefix.toLowerCase()];
+
+	if (!iwUrlTemplate) {
+		return `<span style="color: gray;" title="${linkName} (Unknown wiki prefix)">${linkShow || linkName}</span>`;
+	}
+
+	const linkType = iwUrlTemplate.replace("$1", wikiEncode(pagePart));
+
+	return `<a href="${linkType}" class="extiw" title="${linkName}">${linkShow || linkName}</a>`;
 }
 
 /**
@@ -1181,25 +1253,8 @@ async function AsyncSummaryColorLinks(text) {
 
 			return `<a href="/w/index.php?title=${encodedName}&action=edit&redlink=1" class="new" title="${trueTitle}">${linkShow || linkName}</a>`;
 		} else if (value == 2) { // interwiki link
-			let [prefix, ...restParts] = linkName.split(":");
-			const pagePart = restParts.join(":");
-			const encodedPage = wikiEncode(pagePart);
-
-			let linkType;
-
-			switch (prefix.toUpperCase()) {
-				case "W":
-				case "WP": linkType = `http://en.wikipedia.org/wiki/${encodedPage}`; break;
-				case "MW": linkType = `http://www.mediawiki.org/wiki/${encodedPage}`; break;
-				case "M": linkType = `http://meta.wikipedia.org/wiki/${encodedPage}`; break;
-				case "GOOGLE": linkType = `http://www.google.com/search?q=${encodeURIComponent(pagePart)}`; break;
-				default: linkType = "__PENDING__";
-			}
-
-			if (linkType == "__PENDING__") // Prevent the link from turning to blue and for the user to think its a working link
-				return `<span style="color: gray;" title="${linkName}">${linkShow || linkName}</span>`;
-
-			return `<a href="${linkType}" class="extiw" title="${linkName}">${linkShow || linkName}</a>`;
+			let InterWikiLink = await renderInterwiki(linkName, linkShow);
+			return InterWikiLink;
 		} else {
 			return `<span style="color: gray;" title="${linkName}">${linkShow || linkName}</span>`;
 		}

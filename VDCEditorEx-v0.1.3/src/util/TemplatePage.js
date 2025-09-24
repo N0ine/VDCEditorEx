@@ -31,18 +31,21 @@ function TemplatePage_addEventListener() {
         if (before === -1) return;
 
         const charBefore = before > 0 ? text[before - 1] : null;
-
         if (charBefore && charBefore === "{") return;
 
-        const afterPipe = text.indexOf("|", pos);
         const afterClose = text.indexOf("}}", pos);
-        const end = (afterPipe !== -1 && (afterClose === -1 || afterPipe < afterClose))
-            ? afterPipe
-            : afterClose;
+        if (afterClose === -1) return;
 
-        if (end === -1) return;
+        const afterPipe = text.indexOf("|", pos);
+        let end;
+        if (afterPipe !== -1 && afterPipe < afterClose) {
+            end = afterPipe;
+        } else {
+            end = afterClose;
+        }
 
-        const templateName = text.slice(before + 2, end).trim();
+        const rawName = text.slice(before + 2, end);
+        const templateName = rawName.trim();
 
         if (templateName && !templateName.includes("{")
             && !templateName.includes("|")
@@ -50,6 +53,24 @@ function TemplatePage_addEventListener() {
             && !TimeStampRegex.test(templateName)
             && !MagicWordsAllowedRegex.test(templateName)
         ) {
+            const startOffset = before + 2 + (rawName.length - rawName.trimStart().length);
+            const endOffset = startOffset + templateName.length;
+
+            if (endOffset <= startOffset) return;
+
+            const current = sel.rangeCount ? sel.getRangeAt(0) : null;
+            const sameRange = current && current.startContainer === container
+                && current.endContainer === container && current.startOffset === startOffset && current.endOffset === endOffset;
+
+            if (!sameRange) {
+                const newRange = document.createRange();
+                newRange.setStart(container, startOffset);
+                newRange.setEnd(container, endOffset);
+
+                sel.removeAllRanges();
+                sel.addRange(newRange);
+            }
+
             const url = `https://developer.valvesoftware.com/wiki/Template:${wikiEncode(capitalizeFirst(templateName))}`;
             window.open(url, "_blank");
         }

@@ -69,7 +69,7 @@ function showErrorDialog(message, error) {
     }
 
     let finalMessage = message || "A critical error occurred.\nCheck the console for details.";
-    let ErrCode = "__ERR_" + code.toUpperCase() + "__";
+    let ErrCode = "__ERR_" + (code == String ? code.toUpperCase() : "GENERIC") + "__";
 
     ErrorDialog(finalMessage, ErrCode);
 

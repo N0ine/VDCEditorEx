@@ -646,7 +646,6 @@ function EditorFormatter() {
 
     text = encodeHTML(text);
 
-
 	text = text.substring(0, text.length - 1);
 
 	Div_CodeLines.innerHTML = '<editor-line>' + text.replace(/\n/g, '</editor-line>$&<editor-line>');

@@ -53,8 +53,6 @@ async function EditorMain() {
     MainEditorWrapper = document.createElement('div');
     MainEditorWrapper.id = "VDCEditorEx-MainWrapper";
 
-    SubMainTextArea.style.overflowX = "clip";
-
     let ErrorDlg = await CreateErrorDialog();
 
     const StatusBar = document.createElement('div');
@@ -88,6 +86,7 @@ async function EditorMain() {
     Div_SameSelection = createEditableDiv("VDCEditorEx-SameSelection");
     Div_CodeLines = createEditableDiv("VDCEditorEx-CodeLines");
     Div_StylizedCode = createEditableDiv("VDCEditorEx-StylizedCode");
+    //Div_UserSelect = createEditableDiv("VDCEditorEx-UserSelect");
 
     SettingsPanel = document.createElement('div');
     SettingsPanel.id = "VDCEditorEx-SettingsPanel";
@@ -258,7 +257,10 @@ async function InitTextEditorLogic() {
     document.getElementById('wpPreview').onclick = Func_MoveBackToTextarea;
     document.getElementById('wpDiff').onclick = Func_MoveBackToTextarea;
 
-    document.addEventListener("selectionchange", Func_SelectionChange);
+    document.addEventListener("selectionchange", () => {
+        Func_SelectionChange();
+        //SetCustomSelection();
+    });
 
     Div_Editor.addEventListener('input', () => {
 
@@ -274,9 +276,7 @@ async function InitTextEditorLogic() {
 
         let text = (e.originalEvent || e).clipboardData.getData('text/plain');
 
-        text = text.replaceAll("&", "&amp;");
-        text = text.replaceAll("<", '&lt;');
-        text = text.replaceAll(">", '&gt;');
+        text = encodeHTML(text);
 
         Div_SearchCode.innerHTML = "";
 
@@ -289,9 +289,7 @@ async function InitTextEditorLogic() {
 
         let text = e.dataTransfer.getData('text/plain');
 
-        text = text.replaceAll("&", "&amp;");
-        text = text.replaceAll("<", '&lt;');
-        text = text.replaceAll(">", '&gt;');
+        text = encodeHTML(text);
 
         let range = document.caretRangeFromPoint(e.clientX, e.clientY);
         range.deleteContents();
@@ -348,19 +346,19 @@ async function InitTextEditorLogic() {
                 const target = e.target || e;
                 let text = target.value || "";
 
-                text = text.replaceAll("&", "&amp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;")
-                    .replaceAll("&amp;#91;", "[").replaceAll("&amp;#93;", "]")
+                text = encodeHTML(text).replaceAll("&amp;#91;", "[").replaceAll("&amp;#93;", "]")
                     .replaceAll("&amp;#124;", "|").replaceAll("&amp;#123;", "{").replaceAll("&amp;#125;", "}")
                     .replaceAll("&amp;#42;", "*").replaceAll("&amp;#47;", "/").replace(/&amp;(#\d+|\w+);/g, "&$1;");
 
                 text = text.replace(/\/\*(.*?)\*\/([^\/]+(?=\/)|.*$)/g, (match, header, txt, offset, fullText) => {
-                    const encodedName = PAGE_NAME + "#" + wikiEncode(header.trim());
+                    const fixedHeader = header.trim().replace(/\[|&amp;#91;/g, "&#91;").replace(/\]|&amp;#93;/g, "&#93;");
+                    const encodedName = PAGE_NAME + "#" + wikiEncode(header.trim().replace(/\[|&amp;#91;/g, "").replace(/\]|&amp;#93;/g, ""));
                     const col = txt.trim() ? ": " : "";
 
                     const isEnd = (offset + match.length) === fullText.length;
                     const trimmedTxt = isEnd ? txt.trimEnd() : txt;
 
-                    return `<span dir="auto"><span class="autocomment"><a href="/wiki/${encodedName}" title="${PAGE_NAME}">&#8594;${header.trim()}</a>${col}</span>${trimmedTxt}</span>`
+                    return `<span dir="auto"><span class="autocomment"><a href="/wiki/${encodedName}" title="${PAGE_NAME}">&#8594;${fixedHeader}</a>${col}</span>${trimmedTxt}</span>`
                 });
 
                 let PendingText = text;
@@ -377,7 +375,12 @@ async function InitTextEditorLogic() {
             };
 
             SummaryInput.addEventListener("input", OnInput_Summary);
-            //SummaryInput.innerHTML = OnInput_Summary(SummaryInput);
+
+            const url = window.location.href;
+
+            if (url.includes("section=")) {
+                SummaryInput.innerHTML = OnInput_Summary(SummaryInput);
+            }
         }
     }
 
@@ -438,7 +441,7 @@ function Func_ReplaceLinks() {
         BlurDlg.style.display = "none";
         ReplaceDlg.style.display = "none";
 
-        TextEditor = TextEditor.replace(/\[\[(?!(?:(?::)?[Cc]ategory(?:[ _]talk)?|[Dd]ictionary|[Ff]ile(?:[ _]talk)?|[Gg]oogle|[Gg]oogleGroups|[Hh]elp(?:[ _]talk)?|IMDB|[Ii]mage(?:[ _]talk)?|m|M|mw|MW|[Mm]edia|[Mm]ediaWiki(?:[ _]talk)?|[Mm]eta|[Pp]roject(?:[ _]talk)?|[Ss]dkBug|[Ss]ourceForge|[Ss]pecial|[Ss]teampowered|[Tt]alk|[Tt]emplate(?:[ _]talk)?|[Uu]ser(?:[ _]talk)?|[Vv]alve[ _][Dd]eveloper[ _][Cc]ommunity(?:[ _]talk)?|[Ww][Pp]?|[Ww]iki|[Ww]ikiBooks|[Ww]ikipedia|[Ww]ikiquote|[Ww]iktionary|c|C|[Cc]ommons|[Ss]pecial|[Mm]etawikipedia|\#|\/):)(.+?)]]/g, "{{L|$1}}")
+        TextEditor = TextEditor.replace(/\[\[(?!(?:(?::)?[Cc]ategory(?:[ _]talk)?|[Dd]ictionary|[Ff]ile(?:[ _]talk)?|[Gg]oogle|[Gg]oogleGroups|[Hh]elp(?:[ _]talk)?|IMDB|[Ii]mage(?:[ _]talk)?|m|M|mw|MW|[Mm]edia|[Mm]ediaWiki(?:[ _]talk)?|[Mm]eta|[Pp]roject(?:[ _]talk)?|[Ss]dkBug|[Ss]ourceForge|[Ss]pecial|[Ss]teampowered|[Tt]alk|[Tt]emplate(?:[ _]talk)?|[Uu]ser(?:[ _]talk)?|[Vv]alve[ _][Dd]eveloper[ _][Cc]ommunity(?:[ _]talk)?|[Ww][Pp]?|[Ww]iki|[Ww]ikiBooks|[Ww]ikipedia|[Ww]ikiquote|[Ww]iktionary|c|C|[Cc]ommons|[Ss]pecial|[Mm]etawikipedia):|\#|\/)(.+?)]]/g, "{{L|$1}}")
         TextEditor = TextEditor.replace(/\[\[:(?:[Cc]ategory:)(.+?)]]/g, "{{LCategory|$1}}")
         TextEditor = TextEditor.replace(/\[\[(?:[Cc]ategory:)(.+?)]]/g, "{{ACategory|$1}}")
         TextEditor = TextEditor.replace(/\[\[(?:[Hh]elp:)(.+?)]]/g, "{{LHelp|$1}}")
