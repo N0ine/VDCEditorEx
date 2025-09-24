@@ -115,7 +115,7 @@ function ErrorButtons() {
 
     Cancel.addEventListener('click', (e) => {
         e.preventDefault();
-        document.getElementById("VDCEditorEx-ErrorDlg").style.display = "none";
+        document.getElementById("VDCEditorEx-BlurDlg").style.display = "none";
 
         const WikiCancelSpan = document.getElementById("mw-editform-cancel");
         const WikiCancelLink = WikiCancelSpan?.querySelector("a");
