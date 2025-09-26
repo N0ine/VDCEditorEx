@@ -549,6 +549,11 @@ function Func_SelectionChange()
 			if (window.getSelection().toString().length !== 0) {
 				const selectedText = window.getSelection().toString();
 
+				if (['{', '}', '[', ']', '(', ')'].includes(selectedText)) {
+					highlightMatchingBracket();
+					return;
+				}
+				
 				const raw = Div_Editor.textContent || "";
 				let regex;
 
