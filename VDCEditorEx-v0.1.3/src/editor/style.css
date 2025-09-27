@@ -790,22 +790,16 @@ editor-chars {
 }
 
 editor-space-w {
+	color: #808080;
 	position: relative;
-	font-family: monospace;
+	font-family: 'EditorFont', monospace;
 }
 
 editor-space {
+	color: #808080;
 	position: relative;
 	white-space: pre;
-	font-family: monospace;
-}
-
-editor-space-w:before,
-editor-space:before {
-	content: "\00B7";
-	color: #808080;
-	position: absolute;
-	left: 0;
+	font-family: 'EditorFont', monospace;
 }
 
 editor-endl {
