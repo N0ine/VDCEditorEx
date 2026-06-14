@@ -13,11 +13,11 @@ This is necessary due to the fact that browsers can block packaged extensions in
 
 - Added multi bracket colors
 - Added Live summary preview
-- Added Wiki tabel styling
+- Added Wiki table styling
 - Added page strings counter (/strings pages)
 - Added Template page opener
 	- CTRL + double clicking on the template name in the editor will open a new page (eg. {{Bug|...}})
-- Added Multi line tab identation
+- Added Multi line tab indentation
 	- You can now select multiple lines and press tab to indent
 - Added a button for changing template links to actual wiki links
 - Show invalid HTML tags (Checks for any unclosed html tags)
