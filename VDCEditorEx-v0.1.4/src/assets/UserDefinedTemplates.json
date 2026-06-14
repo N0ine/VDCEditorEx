@@ -1,0 +1,845 @@
+{
+  "Block-1": {
+    "NAMES": {
+      "1": "Bug",
+      "2": "BugNotice"
+    },
+    "PARAMS": {},
+    "PARAMS_COLOR": {},
+    "TemplateColor": "#f55032"
+  },
+  "Block-10": {
+    "NAMES": {
+      "1": "Tip"
+    },
+    "PARAMS": {},
+    "PARAMS_COLOR": {},
+    "TemplateColor": "#ffffa0"
+  },
+  "Block-11": {
+    "NAMES": {
+      "1": "Warning"
+    },
+    "PARAMS": {},
+    "PARAMS_COLOR": {},
+    "TemplateColor": "#f52f2f"
+  },
+  "Block-12": {
+    "NAMES": {
+      "1": "Workaround"
+    },
+    "PARAMS": {},
+    "PARAMS_COLOR": {},
+    "TemplateColor": "#b87142"
+  },
+  "Block-13": {
+    "NAMES": {
+      "1": "Translate",
+      "2": "Translating",
+      "3": "Finish translation",
+      "4": "Update translation",
+      "5": "Machine translation"
+    },
+    "PARAMS": {},
+    "PARAMS_COLOR": {},
+    "TemplateColor": "#daa520"
+  },
+  "Block-14": {
+    "NAMES": {
+      "1": "Cleanup"
+    },
+    "PARAMS": {},
+    "PARAMS_COLOR": {},
+    "TemplateColor": "#f4c430"
+  },
+  "Block-15": {
+    "NAMES": {
+      "1": "Stub",
+      "2": "Cite"
+    },
+    "PARAMS": {},
+    "PARAMS_COLOR": {},
+    "TemplateColor": "#268bff"
+  },
+  "Block-16": {
+    "NAMES": {
+      "1": "Code"
+    },
+    "PARAMS": {},
+    "PARAMS_COLOR": {},
+    "TemplateBGTrans": "42",
+    "TemplateBackgroundColor": "#000000",
+    "TemplateColor": "#d8d7d6"
+  },
+  "Block-17": {
+    "NAMES": {
+      "1": "This is a"
+    },
+    "PARAMS": {
+      "1": "1",
+      "2": "name",
+      "3": "sprite"
+    },
+    "PARAMS_COLOR": {
+      "1": "#87ceeb",
+      "2": "#ffffff",
+      "3": "#ffff00"
+    },
+    "TemplateBGTrans": "42",
+    "TemplateBackgroundColor": "#000000",
+    "TemplateColor": "#d8d7d6"
+  },
+  "Block-18": {
+    "NAMES": {
+      "1": "Ent"
+    },
+    "PARAMS": {
+      "1": "1"
+    },
+    "PARAMS_COLOR": {
+      "1": "#87ceeb"
+    },
+    "TemplateBGTrans": "42",
+    "TemplateBackgroundColor": "#000000",
+    "TemplateColor": "#d8d7d6"
+  },
+  "Block-19": {
+    "NAMES": {
+      "1": "KV",
+      "2": "Kv"
+    },
+    "PARAMS": {
+      "1": "1",
+      "2": "2",
+      "3": "intn",
+      "4": "intn2",
+      "5": "nofgd",
+      "6": "since",
+      "7": "only",
+      "8": "also",
+      "9": "not",
+      "10": "removed",
+      "11": "to",
+      "12": "deprecated"
+    },
+    "PARAMS_COLOR": {
+      "1": "#87ceeb",
+      "2": "#5774ff",
+      "3": "#37ca2c",
+      "4": "#37ca2c",
+      "5": "#ff4848",
+      "6": "#458846",
+      "7": "#bb8b2d",
+      "8": "#a5a640",
+      "9": "#9d341b",
+      "10": "#b24732",
+      "11": "#37ca2c",
+      "12": "#ffe84f"
+    },
+    "TemplateColor": "#d8d7d6"
+  },
+  "Block-2": {
+    "NAMES": {
+      "1": "Clarify",
+      "2": "Confirm",
+      "3": "Elaborate",
+      "4": "Todo",
+      "5": "When",
+      "6": "Where",
+      "7": "Which",
+      "8": "Why"
+    },
+    "PARAMS": {},
+    "PARAMS_COLOR": {},
+    "TemplateColor": "#8bc53f"
+  },
+  "Block-20": {
+    "NAMES": {
+      "1": "Fl"
+    },
+    "PARAMS": {
+      "1": "1",
+      "2": "2",
+      "3": "nofgd",
+      "4": "since",
+      "5": "only",
+      "6": "also",
+      "7": "not",
+      "8": "removed",
+      "9": "deprecated"
+    },
+    "PARAMS_COLOR": {
+      "1": "#87ceeb",
+      "2": "#5774ff",
+      "3": "#ff4848",
+      "4": "#458846",
+      "5": "#bb8b2d",
+      "6": "#a5a640",
+      "7": "#9d341b",
+      "8": "#b24732",
+      "9": "#ffe84f"
+    },
+    "TemplateColor": "#d8d7d6"
+  },
+  "Block-21": {
+    "NAMES": {
+      "1": "I",
+      "2": "O"
+    },
+    "PARAMS": {
+      "1": "1",
+      "2": "nofgd",
+      "3": "since",
+      "4": "param",
+      "5": "only",
+      "6": "also",
+      "7": "not",
+      "8": "removed",
+      "9": "deprecated"
+    },
+    "PARAMS_COLOR": {
+      "1": "#87ceeb",
+      "2": "#ff4848",
+      "3": "#458846",
+      "4": "#5774ff",
+      "5": "#bb8b2d",
+      "6": "#a5a640",
+      "7": "#9d341b",
+      "8": "#b24732",
+      "9": "#ffe84f"
+    },
+    "TemplateColor": "#d8d7d6"
+  },
+  "Block-22": {
+    "NAMES": {
+      "1": "Half-Life 2",
+      "2": "Hl2"
+    },
+    "PARAMS": {},
+    "PARAMS_COLOR": {},
+    "TemplateBGTrans": "33",
+    "TemplateBackgroundColor": "#000000",
+    "TemplateColor": "#e6ac39"
+  },
+  "Block-23": {
+    "NAMES": {
+      "1": "Half-Life 2: Episode One",
+      "2": "Hl2ep1",
+      "3": "Episodic",
+      "4": "Ep1"
+    },
+    "PARAMS": {},
+    "PARAMS_COLOR": {},
+    "TemplateBGTrans": "33",
+    "TemplateBackgroundColor": "#000000",
+    "TemplateColor": "#ff8f00"
+  },
+  "Block-24": {
+    "NAMES": {
+      "1": "Half-Life 2: Episode Two",
+      "2": "Hl2ep2",
+      "3": "Ep2"
+    },
+    "PARAMS": {},
+    "PARAMS_COLOR": {},
+    "TemplateBGTrans": "33",
+    "TemplateBackgroundColor": "#000000",
+    "TemplateColor": "#f26025"
+  },
+  "Block-25": {
+    "NAMES": {
+      "1": "Half-Life 2: Deathmatch",
+      "2": "Hl2dm"
+    },
+    "PARAMS": {},
+    "PARAMS_COLOR": {},
+    "TemplateBGTrans": "33",
+    "TemplateBackgroundColor": "#000000",
+    "TemplateColor": "#ffdd61"
+  },
+  "Block-26": {
+    "NAMES": {
+      "1": "Half-Life 2: Lost Coast",
+      "2": "Hl2lc",
+      "3": "Lostcoast"
+    },
+    "PARAMS": {},
+    "PARAMS_COLOR": {},
+    "TemplateBGTrans": "33",
+    "TemplateBackgroundColor": "#000000",
+    "TemplateColor": "#b7b879"
+  },
+  "Block-27": {
+    "NAMES": {
+      "1": "Counter-Strike: Source",
+      "2": "Css"
+    },
+    "PARAMS": {},
+    "PARAMS_COLOR": {},
+    "TemplateBGTrans": "33",
+    "TemplateBackgroundColor": "#000000",
+    "TemplateColor": "#90c0ff"
+  },
+  "Block-28": {
+    "NAMES": {
+      "1": "Half-Life: Source",
+      "2": "Hls"
+    },
+    "PARAMS": {},
+    "PARAMS_COLOR": {},
+    "TemplateBGTrans": "33",
+    "TemplateBackgroundColor": "#000000",
+    "TemplateColor": "#dc143c"
+  },
+  "Block-29": {
+    "NAMES": {
+      "1": "Half-Life Deathmatch: Source",
+      "2": "Hldms"
+    },
+    "PARAMS": {},
+    "PARAMS_COLOR": {},
+    "TemplateBGTrans": "33",
+    "TemplateBackgroundColor": "#000000",
+    "TemplateColor": "#b58341"
+  },
+  "Block-3": {
+    "NAMES": {
+      "1": "Code fix"
+    },
+    "PARAMS": {},
+    "PARAMS_COLOR": {},
+    "TemplateColor": "#5ba5eb"
+  },
+  "Block-30": {
+    "NAMES": {
+      "1": "Day of Defeat: Source",
+      "2": "Day of Defeat Source",
+      "3": "Dods"
+    },
+    "PARAMS": {},
+    "PARAMS_COLOR": {},
+    "TemplateBGTrans": "33",
+    "TemplateBackgroundColor": "#000000",
+    "TemplateColor": "#4b7941"
+  },
+  "Block-31": {
+    "NAMES": {
+      "1": "Portal",
+      "2": "Portal1"
+    },
+    "PARAMS": {},
+    "PARAMS_COLOR": {},
+    "TemplateBGTrans": "33",
+    "TemplateBackgroundColor": "#000000",
+    "TemplateColor": "#6bbcfa"
+  },
+  "Block-32": {
+    "NAMES": {
+      "1": "Portal 2",
+      "2": "Portal2",
+      "3": "P2",
+      "4": "Portal 2 Authoring Tools",
+      "5": "P2branch"
+    },
+    "PARAMS": {},
+    "PARAMS_COLOR": {},
+    "TemplateBGTrans": "33",
+    "TemplateBackgroundColor": "#000000",
+    "TemplateColor": "#23b1e5"
+  },
+  "Block-33": {
+    "NAMES": {
+      "1": "Team Fortress 2",
+      "2": "Tf2",
+      "3": "Tf2branch"
+    },
+    "PARAMS": {},
+    "PARAMS_COLOR": {},
+    "TemplateBGTrans": "33",
+    "TemplateBackgroundColor": "#000000",
+    "TemplateColor": "#cf7336"
+  },
+  "Block-34": {
+    "NAMES": {
+      "1": "Left 4 Dead",
+      "2": "Left4dead",
+      "3": "L4d",
+      "4": "Left 4 Dead Authoring Tools",
+      "5": "L4dbranch"
+    },
+    "PARAMS": {},
+    "PARAMS_COLOR": {},
+    "TemplateBGTrans": "33",
+    "TemplateBackgroundColor": "#000000",
+    "TemplateColor": "#439e3c"
+  },
+  "Block-35": {
+    "NAMES": {
+      "1": "Left 4 Dead 2",
+      "2": "Left4dead2",
+      "3": "L4d2",
+      "4": "Left 4 Dead 2 Authoring Tools"
+    },
+    "PARAMS": {},
+    "PARAMS_COLOR": {},
+    "TemplateBGTrans": "33",
+    "TemplateBackgroundColor": "#000000",
+    "TemplateColor": "#bfa828"
+  },
+  "Block-36": {
+    "NAMES": {
+      "1": "Alien Swarm",
+      "2": "As",
+      "3": "AS",
+      "4": "Asw",
+      "5": "Alien Swarm SDK",
+      "6": "Asbranch"
+    },
+    "PARAMS": {},
+    "PARAMS_COLOR": {},
+    "TemplateBGTrans": "33",
+    "TemplateBackgroundColor": "#000000",
+    "TemplateColor": "#108fbe"
+  },
+  "Block-37": {
+    "NAMES": {
+      "1": "Counter-Strike: Global Offensive",
+      "2": "Csgo",
+      "3": "Counter-Strike: Global Offensive Authoring Tools",
+      "4": "Csgobranch"
+    },
+    "PARAMS": {},
+    "PARAMS_COLOR": {},
+    "TemplateBGTrans": "33",
+    "TemplateBackgroundColor": "#000000",
+    "TemplateColor": "#e9b963"
+  },
+  "Block-38": {
+    "NAMES": {
+      "1": "Garry's Mod",
+      "2": "Gmod",
+      "3": "GMOD"
+    },
+    "PARAMS": {},
+    "PARAMS_COLOR": {},
+    "TemplateBGTrans": "33",
+    "TemplateBackgroundColor": "#000000",
+    "TemplateColor": "#1295f0"
+  },
+  "Block-39": {
+    "NAMES": {
+      "1": "Counter-Strike",
+      "2": "Cstrike",
+      "3": "Cs"
+    },
+    "PARAMS": {},
+    "PARAMS_COLOR": {},
+    "TemplateBGTrans": "33",
+    "TemplateBackgroundColor": "#000000",
+    "TemplateColor": "#dedede"
+  },
+  "Block-4": {
+    "NAMES": {
+      "1": "Deprecated"
+    },
+    "PARAMS": {},
+    "PARAMS_COLOR": {},
+    "TemplateColor": "#ffe84f"
+  },
+  "Block-40": {
+    "NAMES": {
+      "1": "Counter-Strike: Condition Zero",
+      "2": "Czero",
+      "3": "Cscz"
+    },
+    "PARAMS": {},
+    "PARAMS_COLOR": {},
+    "TemplateBGTrans": "33",
+    "TemplateBackgroundColor": "#000000",
+    "TemplateColor": "#fffa71"
+  },
+  "Block-41": {
+    "NAMES": {
+      "1": "Counter-Strike: Condition Zero Deleted Scenes",
+      "2": "Condition Zero Deleted Scenes",
+      "3": "Czeror",
+      "4": "Czds"
+    },
+    "PARAMS": {},
+    "PARAMS_COLOR": {},
+    "TemplateBGTrans": "33",
+    "TemplateBackgroundColor": "#000000",
+    "TemplateColor": "#0f6cb1"
+  },
+  "Block-42": {
+    "NAMES": {
+      "1": "Deathmatch Classic",
+      "2": "Dmc"
+    },
+    "PARAMS": {},
+    "PARAMS_COLOR": {},
+    "TemplateBGTrans": "33",
+    "TemplateBackgroundColor": "#000000",
+    "TemplateColor": "#998e6b"
+  },
+  "Block-43": {
+    "NAMES": {
+      "1": "Day of Defeat",
+      "2": "Dod"
+    },
+    "PARAMS": {},
+    "PARAMS_COLOR": {},
+    "TemplateBGTrans": "33",
+    "TemplateBackgroundColor": "#000000",
+    "TemplateColor": "#466b44"
+  },
+  "Block-44": {
+    "NAMES": {
+      "1": "Half-Life",
+      "2": "Hl",
+      "3": "Hl1"
+    },
+    "PARAMS": {},
+    "PARAMS_COLOR": {},
+    "TemplateBGTrans": "33",
+    "TemplateBackgroundColor": "#000000",
+    "TemplateColor": "#ff5500"
+  },
+  "Block-45": {
+    "NAMES": {
+      "1": "Half-Life: Opposing Force",
+      "2": "Hl1:op4",
+      "3": "Op4",
+      "4": "Hlof",
+      "5": "Hlop4"
+    },
+    "PARAMS": {},
+    "PARAMS_COLOR": {},
+    "TemplateBGTrans": "33",
+    "TemplateBackgroundColor": "#000000",
+    "TemplateColor": "#00cc00"
+  },
+  "Block-46": {
+    "NAMES": {
+      "1": "Half-Life: Blue Shift",
+      "2": "Hl1:bs",
+      "3": "Hlbs"
+    },
+    "PARAMS": {},
+    "PARAMS_COLOR": {},
+    "TemplateBGTrans": "33",
+    "TemplateBackgroundColor": "#000000",
+    "TemplateColor": "#59a8ff"
+  },
+  "Block-47": {
+    "NAMES": {
+      "1": "Ricochet",
+      "2": "Rc"
+    },
+    "PARAMS": {},
+    "PARAMS_COLOR": {},
+    "TemplateBGTrans": "33",
+    "TemplateBackgroundColor": "#000000",
+    "TemplateColor": "#a733ff"
+  },
+  "Block-48": {
+    "NAMES": {
+      "1": "Team Fortress Classic",
+      "2": "Tfc"
+    },
+    "PARAMS": {},
+    "PARAMS_COLOR": {},
+    "TemplateBGTrans": "33",
+    "TemplateBackgroundColor": "#000000",
+    "TemplateColor": "#927938"
+  },
+  "Block-49": {
+    "NAMES": {
+      "1": "Artifact"
+    },
+    "PARAMS": {},
+    "PARAMS_COLOR": {},
+    "TemplateBGTrans": "33",
+    "TemplateBackgroundColor": "#000000",
+    "TemplateColor": "#c79d4e"
+  },
+  "Block-5": {
+    "NAMES": {
+      "1": "Fix"
+    },
+    "PARAMS": {},
+    "PARAMS_COLOR": {},
+    "TemplateColor": "#71e354"
+  },
+  "Block-50": {
+    "NAMES": {
+      "1": "Counter-Strike 2",
+      "2": "Cs2"
+    },
+    "PARAMS": {},
+    "PARAMS_COLOR": {},
+    "TemplateBGTrans": "33",
+    "TemplateBackgroundColor": "#000000",
+    "TemplateColor": "#e0881e"
+  },
+  "Block-51": {
+    "NAMES": {
+      "1": "Deadlock"
+    },
+    "PARAMS": {},
+    "PARAMS_COLOR": {},
+    "TemplateBGTrans": "33",
+    "TemplateBackgroundColor": "#000000",
+    "TemplateColor": "#efdebe"
+  },
+  "Block-52": {
+    "NAMES": {
+      "1": "Dota Underlords",
+      "2": "Dul",
+      "3": "Dotaunderlords",
+      "4": "Underlords"
+    },
+    "PARAMS": {},
+    "PARAMS_COLOR": {},
+    "TemplateBGTrans": "33",
+    "TemplateBackgroundColor": "#000000",
+    "TemplateColor": "#add8e6"
+  },
+  "Block-53": {
+    "NAMES": {
+      "1": "Dota 2",
+      "2": "Dota2",
+      "3": "D2"
+    },
+    "PARAMS": {},
+    "PARAMS_COLOR": {},
+    "TemplateBGTrans": "33",
+    "TemplateBackgroundColor": "#000000",
+    "TemplateColor": "#ff474e"
+  },
+  "Block-54": {
+    "NAMES": {
+      "1": "Half-Life: Alyx",
+      "2": "Hla",
+      "3": "Hl:a",
+      "4": "Hlalyx"
+    },
+    "PARAMS": {},
+    "PARAMS_COLOR": {},
+    "TemplateBGTrans": "33",
+    "TemplateBackgroundColor": "#000000",
+    "TemplateColor": "#c25e36"
+  },
+  "Block-55": {
+    "NAMES": {
+      "1": "GoldSrc",
+      "2": "Goldsource",
+      "3": "Gsrc",
+      "4": "Gldsrc"
+    },
+    "PARAMS": {},
+    "PARAMS_COLOR": {},
+    "TemplateBGTrans": "33",
+    "TemplateBackgroundColor": "#000000",
+    "TemplateColor": "#fd7360"
+  },
+  "Block-56": {
+    "NAMES": {
+      "1": "Source",
+      "2": "Src"
+    },
+    "PARAMS": {},
+    "PARAMS_COLOR": {},
+    "TemplateBGTrans": "33",
+    "TemplateBackgroundColor": "#000000",
+    "TemplateColor": "#f2a52b"
+  },
+  "Block-57": {
+    "NAMES": {
+      "1": "Source 2",
+      "2": "Source2",
+      "3": "Src2"
+    },
+    "PARAMS": {},
+    "PARAMS_COLOR": {},
+    "TemplateBGTrans": "33",
+    "TemplateBackgroundColor": "#000000",
+    "TemplateColor": "#f2a52b"
+  },
+  "Block-58": {
+    "NAMES": {
+      "1": "Also",
+      "2": "Since"
+    },
+    "PARAMS": {},
+    "PARAMS_COLOR": {},
+    "TemplateBGTrans": "33",
+    "TemplateBackgroundColor": "#000000",
+    "TemplateColor": "#529352"
+  },
+  "Block-59": {
+    "NAMES": {
+      "1": "In"
+    },
+    "PARAMS": {},
+    "PARAMS_COLOR": {},
+    "TemplateBGTrans": "33",
+    "TemplateBackgroundColor": "#000000",
+    "TemplateColor": "#bb8b2d"
+  },
+  "Block-6": {
+    "NAMES": {
+      "1": "Important"
+    },
+    "PARAMS": {},
+    "PARAMS_COLOR": {},
+    "TemplateColor": "#f0d300"
+  },
+  "Block-60": {
+    "NAMES": {
+      "1": "Removed"
+    },
+    "PARAMS": {},
+    "PARAMS_COLOR": {},
+    "TemplateBGTrans": "33",
+    "TemplateBackgroundColor": "#000000",
+    "TemplateColor": "#b24732"
+  },
+  "Block-61": {
+    "NAMES": {
+      "1": "Not"
+    },
+    "PARAMS": {},
+    "PARAMS_COLOR": {},
+    "TemplateBGTrans": "33",
+    "TemplateBackgroundColor": "#000000",
+    "TemplateColor": "#9d341b"
+  },
+  "Block-62": {
+    "NAMES": {
+      "1": "Source 2007",
+      "2": "Src07"
+    },
+    "PARAMS": {},
+    "PARAMS_COLOR": {},
+    "TemplateBGTrans": "33",
+    "TemplateBackgroundColor": "#000000",
+    "TemplateColor": "#f26025"
+  },
+  "Block-63": {
+    "NAMES": {
+      "1": "Source 2004",
+      "2": "Src04"
+    },
+    "PARAMS": {},
+    "PARAMS_COLOR": {},
+    "TemplateBGTrans": "33",
+    "TemplateBackgroundColor": "#000000",
+    "TemplateColor": "#ffcc14"
+  },
+  "Block-64": {
+    "NAMES": {
+      "1": "Cmd"
+    },
+    "PARAMS": {
+      "1": "1"
+    },
+    "PARAMS_COLOR": {
+      "1": "#87ceeb"
+    },
+    "TemplateBGTrans": "42",
+    "TemplateBackgroundColor": "#000000",
+    "TemplateColor": "#d8d7d6"
+  },
+  "Block-65": {
+    "NAMES": {
+      "1": "Source 2009",
+      "2": "Src09"
+    },
+    "PARAMS": {},
+    "PARAMS_COLOR": {},
+    "TemplateBGTrans": "33",
+    "TemplateBackgroundColor": "#000000",
+    "TemplateColor": "#558FA5"
+  },
+  "Block-67": {
+    "NAMES": {
+      "1": "Source 2006",
+      "2": "Src06"
+    },
+    "PARAMS": {},
+    "PARAMS_COLOR": {},
+    "TemplateBGTrans": "33",
+    "TemplateBackgroundColor": "#000000",
+    "TemplateColor": "#FF8F00"
+  },
+  "Block-68": {
+    "NAMES": {
+      "1": "Black Mesa",
+      "2": "Bms",
+      "3": "BMS"
+    },
+    "PARAMS": {},
+    "PARAMS_COLOR": {},
+    "TemplateBGTrans": "33",
+    "TemplateBackgroundColor": "#000000",
+    "TemplateColor": "#E57126"
+  },
+  "Block-69": {
+    "NAMES": {
+      "1": "Titanfall",
+      "2": "Tfbranch"
+    },
+    "PARAMS": {},
+    "PARAMS_COLOR": {},
+    "TemplateBGTrans": "33",
+    "TemplateBackgroundColor": "#000000",
+    "TemplateColor": "#adc9bd"
+  },
+  "Block-7": {
+    "NAMES": {
+      "1": "Note"
+    },
+    "PARAMS": {},
+    "PARAMS_COLOR": {},
+    "TemplateColor": "#ffff60"
+  },
+  "Block-70": {
+    "NAMES": {
+      "1": "Source 2013",
+      "2": "Src13"
+    },
+    "PARAMS": {},
+    "PARAMS_COLOR": {},
+    "TemplateBGTrans": "33",
+    "TemplateBackgroundColor": "#000000",
+    "TemplateColor": "#8cc850"
+  },
+  "Block-71": {
+    "NAMES": {
+      "1": "Insurgency"
+    },
+    "PARAMS": {},
+    "PARAMS_COLOR": {},
+    "TemplateBGTrans": "33",
+    "TemplateBackgroundColor": "#000000",
+    "TemplateColor": "#c7d1e0"
+  },
+  "Block-8": {
+    "NAMES": {
+      "1": "Placement tip",
+      "2": "PlacementTip"
+    },
+    "PARAMS": {},
+    "PARAMS_COLOR": {},
+    "TemplateColor": "#6a72ff"
+  },
+  "Block-9": {
+    "NAMES": {
+      "1": "Question"
+    },
+    "PARAMS": {},
+    "PARAMS_COLOR": {},
+    "TemplateColor": "#6187b2"
+  }
+}
